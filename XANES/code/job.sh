@@ -18,5 +18,5 @@
 \
 ##$ -l h_data=1G\
 \
-./scf C20.scf.in C.UPF\
-./xanes C20.xspectra.in}
+./scf C20.scf.in C.UPF
+./xanes C20.xspectra.in
