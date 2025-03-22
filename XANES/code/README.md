@@ -1,8 +1,8 @@
 
-Executable Instructions and Notes
+# Executable Instructions and Notes
 
 
-scf
+## scf
 
 Function: perform SCF calculations 
 
@@ -22,10 +22,7 @@ Instructions:
 9. Additional outputs needed for xanes calculation will be located in tmp 
 
 
-
-
-
-xanes 
+## xanes 
 
 Function: generate XANES spectra data (.dat) from SCF calculation
 
@@ -41,10 +38,7 @@ Instructions:
 6. Main outputs will be located in results including xspectra.out and .dat
 
 
-
-
-
-job
+## job
 
 Function: used to run scf or xanes calculations with higher performance
 
