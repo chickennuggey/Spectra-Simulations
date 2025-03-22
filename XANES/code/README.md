@@ -1,8 +1,14 @@
+# Code Scripts
 
-# Executable Instructions and Notes
+## Python 
 
+### vasp_to_input.py
 
-## scf
+**Purpose**: Contains list of functions needed to prepare input files for scf (pw.x) and XANES calculations (xspectra.x) along with additional functions to plot spectra data from .dat files. 
+
+## Bash Executables
+
+### scf.sh
 
 **Function**: perform SCF calculations 
 
@@ -21,8 +27,7 @@ Instructions:
 8. Main outputs will be located in results including scf.out and .cfw
 9. Additional outputs needed for xanes calculation will be located in tmp 
 
-
-## xanes 
+### xanes.sh
 
 **Function**: generate XANES spectra data (.dat) from SCF calculation
 
@@ -37,8 +42,7 @@ Instructions:
 5. Execute the following command: ./xanes material.xspectra.in
 6. Main outputs will be located in results including xspectra.out and .dat
 
-
-## job
+### job.sh
 
 **Function**: used to run scf or xanes calculations with higher performance
 
