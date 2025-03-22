@@ -4,7 +4,7 @@
 
 ## scf
 
-Function: perform SCF calculations 
+**Function**: perform SCF calculations 
 
 Arguments:
 - 1st argument is scf.in file (make sure the directories in the scf.in match)
@@ -24,7 +24,7 @@ Instructions:
 
 ## xanes 
 
-Function: generate XANES spectra data (.dat) from SCF calculation
+**Function**: generate XANES spectra data (.dat) from SCF calculation
 
 Arguments:
 - 1st argument is xspectra.in file (make sure the directories in xspectra.in match)
@@ -40,7 +40,7 @@ Instructions:
 
 ## job
 
-Function: used to run scf or xanes calculations with higher performance
+**Function**: used to run scf or xanes calculations with higher performance
 
 Instructions:
 1. Adjust the input arguments for ./scf in the script
