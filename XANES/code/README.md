@@ -22,6 +22,7 @@
 ### scf.sh
 
 **Function**: perform SCF calculations 
+
 **Arguments**:
 1. scf.in (pw.x input file)
 2. .UPF (pseudofile)
@@ -29,26 +30,32 @@
 ### xanes.sh
 
 **Function**: generate XANES spectra data (.dat) from SCF calculation
+
 **Arguments**:
 1. xspectra.in (xspectra.x input file)
+
 **NOTE**: MAKE SURE YOU HAVE RAN pw.x BEFOREHAND
 
 ### xanes_crystal.sh
 
 **Function**: generate XANES spectra data for all absorbing atoms
+
 **Arguments**:
 1. scf.in (pw.x input file)
 2. .UPF (pseudofile)
 3. xspectra.in (xspectra.x input file)
+
 **NOTE**: MAKE SURE THE FIRST ATOM IS THE ABSORBING ATOM (to ensure all atoms are looped through)
 
 ### xanes_amorphous.sh
 
 **Function**: generate XANES spectra data for central absorbing atoms within 3 Angstroms of the boundary
+
 **Arguments**:
 1. scf.in (pw.x input file)
 2. .UPF (pseudofile)
 3. xspectra.in (xspectra.x input file)
+
 **NOTE**: MAKE SURE THE FIRST ATOM IS THE ABSORBING ATOM (to ensure all atoms are looped through)
 
 ### job.sh
