@@ -15,6 +15,7 @@ fi
 cd `dirname $0`
 SAMPLE_DIR=`pwd`
 
+# save inputs
 SCF_INPUT="$1"
 PSEUDO_INPUT="$2"
 NAME="${SCF_INPUT%.scf.in}"
@@ -44,6 +45,7 @@ echo "PSEUDO_DIR is set to: $PSEUDO_DIR"
 echo "RESULTS_DIR is set to: $RESULTS_DIR"
 echo "TMP_DIR is set to: $TMP_DIR"
 
+# check existing bin and pseudo directory
 echo -e "Checking directories..."
 for DIR in "$BIN_DIR" "$PSEUDO_DIR" ; do
     if test ! -d $DIR ; then
@@ -55,6 +57,7 @@ for DIR in "$BIN_DIR" "$PSEUDO_DIR" ; do
 done
 echo -e "Done."
 
+# check for pw.x in bin directory
 echo -e "Checking for pw.x..."
 if test ! -x $BIN_DIR/pw.x ; then
     echo -e "ERROR: $BIN_DIR/pw.x not found or not executable"
@@ -63,6 +66,7 @@ if test ! -x $BIN_DIR/pw.x ; then
 fi
 echo -e "Done."
 
+# check pseudofile in pseudo bin
 echo -e "Checking for pseudofiles..."
 for FILE in $PSEUDO_INPUT ; do
     if test ! -r $PSEUDO_DIR/$FILE ; then
@@ -73,6 +77,7 @@ for FILE in $PSEUDO_INPUT ; do
 done
 echo -e "Done."
 
+# remove all contents in tmp directory
 echo -e "Cleaning temporary directory..."
 rm -rf $TMP_DIR/*
 echo -e "Done.\n"
