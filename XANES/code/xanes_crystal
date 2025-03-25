@@ -114,4 +114,4 @@ hour=$((total_runtime / 3600))
 minute=$(( (total_runtime % 3600) / 60 ))
 second=$(( (total_runtime % 3600) % 60 ))
 
-echo -e "Total Runtime: $hour:$minute:$second (hh:mm:ss)"
+echo -e "\nTotal Runtime: $hour:$minute:$second (hh:mm:ss)"
