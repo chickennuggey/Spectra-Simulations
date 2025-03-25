@@ -2,6 +2,7 @@
 
 start_time=`date +%s` 
 
+echo -e "############ Checking Input Files ###################"
 # Check if there are required inputs
 if [ -z "$1" ]; then
     echo "Error: Please enter a pw.x input file."
@@ -11,6 +12,7 @@ if [ -z "$2" ]; then
     echo "Error: Please enter a pseudofile."
     exit 1
 fi
+echo -e "\nDone\n"
 
 cd `dirname $0`
 SAMPLE_DIR=`pwd`
@@ -29,7 +31,6 @@ echo -e "Name of material is $NAME\n"
 echo -e
 
 echo -e "########## Loading in necessary variables and checking data ###############"
-
 
 echo -e "\nLoading in environment variables..."
 . ../../environment_variables 
@@ -81,7 +82,6 @@ echo -e "Done."
 echo -e "Cleaning temporary directory..."
 rm -rf $TMP_DIR/*
 echo -e "Done.\n"
-
 
 echo -e "################### Running calculations ########################"
 
