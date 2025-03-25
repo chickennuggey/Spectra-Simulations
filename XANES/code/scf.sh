@@ -2,6 +2,16 @@
 
 start_time=`date +%s` 
 
+# Check if there are required inputs
+if [ -z "$1" ]; then
+    echo "Error: Please enter a pw.x input file."
+    exit 1
+fi
+if [ -z "$2" ]; then
+    echo "Error: Please enter a pseudofile."
+    exit 1
+fi
+
 cd `dirname $0`
 SAMPLE_DIR=`pwd`
 
@@ -9,20 +19,20 @@ SCF_INPUT="$1"
 PSEUDO_INPUT="$2"
 NAME="${SCF_INPUT%.scf.in}"
 
-echo -e "\n############ This script will run pw.x for $SCF_INPUT ###################\n"
+echo -e "############ This script will run pw.x for $SCF_INPUT ###################"
 
 echo -e
-echo -e "SCF input is $SCF_INPUT"
+echo -e "\nSCF input is $SCF_INPUT"
 echo -e "PSEUDO input is $PSEUDO_INPUT"
-echo -e "Name of material is $NAME"
+echo -e "Name of material is $NAME\n"
 echo -e
 
-echo -e "\n########## Loading in necessary variables and checking data ###############\n"
+echo -e "########## Loading in necessary variables and checking data ###############"
 
 
 echo -e "\nLoading in environment variables..."
 . ../../environment_variables 
-echo -e "Done.\n"
+echo -e "Done."
 
 BIN_DIR="$SAMPLE_DIR/../../bin"
 PSEUDO_DIR="$SAMPLE_DIR/pseudo"
@@ -34,7 +44,7 @@ echo "PSEUDO_DIR is set to: $PSEUDO_DIR"
 echo "RESULTS_DIR is set to: $RESULTS_DIR"
 echo "TMP_DIR is set to: $TMP_DIR"
 
-echo -e "\nChecking directories..."
+echo -e "Checking directories..."
 for DIR in "$BIN_DIR" "$PSEUDO_DIR" ; do
     if test ! -d $DIR ; then
         echo -e
@@ -43,17 +53,17 @@ for DIR in "$BIN_DIR" "$PSEUDO_DIR" ; do
         exit 1
     fi
 done
-echo -e "Done.\n"
+echo -e "Done."
 
-echo -e "\nChecking for pw.x..."
+echo -e "Checking for pw.x..."
 if test ! -x $BIN_DIR/pw.x ; then
     echo -e "ERROR: $BIN_DIR/pw.x not found or not executable"
     echo -e "Aborting..."
     exit 1
 fi
-echo -e "Done.\n"
+echo -e "Done."
 
-echo -e "\nChecking for pseudofiles..."
+echo -e "Checking for pseudofiles..."
 for FILE in $PSEUDO_INPUT ; do
     if test ! -r $PSEUDO_DIR/$FILE ; then
         echo -e "ERROR: $PSEUDO_DIR/$FILE not existent or not readable"
@@ -61,24 +71,24 @@ for FILE in $PSEUDO_INPUT ; do
         exit 1
     fi
 done
-echo -e "Done.\n"
+echo -e "Done."
 
-echo -e "\nCleaning temporary directory..."
+echo -e "Cleaning temporary directory..."
 rm -rf $TMP_DIR/*
 echo -e "Done.\n"
 
 
-echo -e "\n################### Running calculations ########################\n"
+echo -e "################### Running calculations ########################"
 
 cd $RESULTS_DIR
 
 PW_COMMAND="$PARA_PREFIX $BIN_DIR/pw.x $PARA_POSTFIX"
 
-echo -e "\n\nExtracting core wavefunctions from pseudofile..."
+echo -e "\nExtracting core wavefunctions from pseudofile..."
 $SAMPLE_DIR/../tools/upf2plotcore.sh $PSEUDO_DIR/$PSEUDO_INPUT > $NAME.wfc
-echo -e "Done.\n"
+echo -e "Done."
 
-echo -e "\n\nPerforming SCF calculations on $SCF_INPUT..."
+echo -e "Performing SCF calculations on $SCF_INPUT..."
 $PW_COMMAND < $SCF_INPUT > $NAME.scf.out
 check_failure $?
 echo -e "Done.\n"
@@ -90,6 +100,6 @@ hours=$((runtime / 3600))
 minutes=$(( (runtime % 3600) / 60 ))
 seconds=$(( (runtime % 3600) % 60 ))
 
-echo "Runtime: $hours:$minutes:$seconds (hh:mm:ss)"
+echo "SCF Runtime: $hours:$minutes:$seconds (hh:mm:ss)"
 
-echo -e "\nSCF output (scf.out) and core wavefunction (.cfw) file located in $RESULTS_DIR \n"
+echo -e "SCF output (scf.out) and core wavefunction (.cfw) file located in $RESULTS_DIR "
