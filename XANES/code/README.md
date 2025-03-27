@@ -21,7 +21,7 @@
 
 | Bash Scripts | Function | Arguments  | 
 | --- | --- | --- |
-| utils | contains useful functions | update_input\n1. input file\n2. parameter\n3.new value\n4. new file (optional)|
+| utils | contains useful functions | update_input\1. input file\2. parameter\n3.new value\4. new file (optional)|
 | scf | performs SCF calculations | |
 | xanes | performs XANES calculations | |
 | xanes_crystal | performs SCF & XANES calculations for all atoms | |
