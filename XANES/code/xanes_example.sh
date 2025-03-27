@@ -12,7 +12,7 @@
 ##$ -l h_data=1G
 
 # import functions
-source ./xanes_utils
+source ./utils
 
 # runtime vs number of atoms
 nat=(10 20 50 100 261)
