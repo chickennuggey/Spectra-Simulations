@@ -19,6 +19,14 @@
 8. Main outputs will be located in results directory
 9. Additional outputs needed for xanes calculation will be located in tmp 
 
+| Bash Scripts | Function | Arguments  | 
+| --- | --- | --- |
+| utils | contains useful functions | update_input\n1. input file\n2. parameter\n3.new value\n4. new file (optional)|
+| scf | performs SCF calculations | |
+| xanes | performs XANES calculations | |
+| xanes_crystal | performs SCF & XANES calculations for all atoms | |
+| xanes_amorphous | performs SCF & XANES calculations for central atoms within 3 Å | |
+
 ### scf.sh
 
 **Function**: perform SCF calculations 
