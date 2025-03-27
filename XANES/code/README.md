@@ -21,50 +21,15 @@
 
 | Bash Scripts | Function | Arguments  | 
 | --- | --- | --- |
-| utils | contains useful functions | update_input<br/>1. input file\2. parameter\n3.new value\4. new file (optional)|
-| scf | performs SCF calculations | |
-| xanes | performs XANES calculations | |
-| xanes_crystal | performs SCF & XANES calculations for all atoms | |
-| xanes_amorphous | performs SCF & XANES calculations for central atoms within 3 Å | |
+| `utils` | contains useful functions | `update_input`<br/>1. input file<br/>2. parameter<br/>3.new value<br/>4. new file (optional)|
+| `scf` | performs SCF calculations | 1. pw.x input file (.scf.in)<br/>2. pseudofile |
+| `xanes` | performs XANES calculations | 1. xspectra.x input file (.xspectra.in)|
+| `xanes_crystal` | performs SCF & XANES calculations for all atoms | 1. pw.x input file(.scf.in)<br/>2. pseudofile<br/>3. xspectra.x input file (.xspectra.in)|
+| `xanes_amorphous` | performs SCF & XANES calculations for central atoms within 3 Å | 1. pw.x input file(.scf.in)<br/>2. pseudofile<br/>3. xspectra.x input file (.xspectra.in) |
 
-### scf.sh
-
-**Function**: perform SCF calculations 
-
-**Arguments**:
-1. scf.in (pw.x input file)
-2. .UPF (pseudofile)
-
-### xanes.sh
-
-**Function**: generate XANES spectra data (.dat) from SCF calculation
-
-**Arguments**:
-1. xspectra.in (xspectra.x input file)
-
-**NOTE**: MAKE SURE YOU HAVE RAN pw.x BEFOREHAND
-
-### xanes_crystal.sh
-
-**Function**: generate XANES spectra data for all absorbing atoms
-
-**Arguments**:
-1. scf.in (pw.x input file)
-2. .UPF (pseudofile)
-3. xspectra.in (xspectra.x input file)
-
-**NOTE**: MAKE SURE THE FIRST ATOM IS THE ABSORBING ATOM (to ensure all atoms are looped through)
-
-### xanes_amorphous.sh
-
-**Function**: generate XANES spectra data for central absorbing atoms within 3 Angstroms of the boundary
-
-**Arguments**:
-1. scf.in (pw.x input file)
-2. .UPF (pseudofile)
-3. xspectra.in (xspectra.x input file)
-
-**NOTE**: MAKE SURE THE FIRST ATOM IS THE ABSORBING ATOM (to ensure all atoms are looped through)
+**Additional Notes**
+* Always ensure there is output from `scf` before using `xanes` 
+* The first atom should be labeled as the absorbing atom in `xanes_amorphous` and `xanes_crystal` to ensure all atoms are looped through and checked
 
 ### job.sh
 
