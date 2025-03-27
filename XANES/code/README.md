@@ -1,12 +1,6 @@
 # Code Scripts
 
-## Python 
-
-### vasp_to_input.py
-
-**Purpose**: Contains list of functions needed to prepare input files for scf (pw.x) and XANES calculations (xspectra.x) along with additional functions to plot spectra data from .dat files. 
-
-## Bash
+# Bash
 
 **Instructions to Setup**:
 1. Create a new directory to store your data for a specific material (qe-7.3.1/XSpectra/material)
@@ -31,6 +25,9 @@
 * Always ensure there is output from `scf` before using `xanes` 
 * The first atom should be labeled as the absorbing atom in `xanes_amorphous` and `xanes_crystal` to ensure all atoms are looped through and checked
 
-### job.sh
+## Python 
 
-**Function**: used to run scf or xanes calculations with higher performance in cluster
+### vasp_to_input.py
+
+**Function**: Contains list of functions needed to prepare input files for scf (pw.x) and XANES calculations (xspectra.x) along with additional functions to plot spectra data from .dat files. 
+
