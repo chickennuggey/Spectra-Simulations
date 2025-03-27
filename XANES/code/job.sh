@@ -12,7 +12,7 @@
 ##$ -l h_data=1G
 
 # import functions
-source ./xanes_functions.sh
+source ./xanes_utils.sh
 
 # runtime vs number of atoms
 nat=(10 20 50 100 261)
@@ -26,21 +26,21 @@ for n in "$nat[@]"; do
     update_input_new results/aC1.xspectra.in results/$prefix.xspectra.in prefix "'$prefix'"
     update_input results/$prefix.xspectra.in filecore "'$prefix.wfc'"
     # run calculations
-    scf $prefix.scf.in C_PBE_TM_2pj.UPF
-    xanes $prefix.xspectra.in
+    ./scf $prefix.scf.in C_PBE_TM_2pj.UPF
+    ./xanes $prefix.xspectra.in
 done
 
 # diamond vs xgamma 
-scf diamond.scf.in C_PBE_TM_2pj.UPF
+./scf diamond.scf.in C_PBE_TM_2pj.UPF
 xgamma=(0.4 0.8 1)
 for x in "$xgamma[@]"; do
     prefix="diamond_$x"
     update_input_new results/diamond.xspectra.in results/$prefix.xspectra.in prefix "'$prefix'"
-    xanes $prefix.xspectra.in
+    ./xanes $prefix.xspectra.in
 done  
 
 # carbon vs xgamma 
-scf aC.scf.in C_PBE_TM_2pj.UPF
+./scf aC.scf.in C_PBE_TM_2pj.UPF
 xgamma=(0.4 0.8 1.5 2 3)
 for x in "$xgamma[@]"; do
     prefix="aC_$x"
@@ -54,11 +54,11 @@ for x in "$xgamma[@]"; do
     prefix="avg_aC_$x"
     update_input_new results/aC.scf.in results/$prefix.scf.in prefix "'$prefix'"
     update_input_new results/aC.xspectra.in results/$prefix.xspectra.in prefix "'$prefix'"
-    xanes_amorphous $prefix.scf.in C_PBE_TM_2pj.UPF $prefix.xspectra.in
+    ./xanes_amorphous $prefix.scf.in C_PBE_TM_2pj.UPF $prefix.xspectra.in
 done 
 
 # average diamond 
 prefix="avg_diamond_0.8"
 update_input_new results/diamond.scf.in results/$prefix.scf.in prefix "'$prefix'"
 update_input_new results/diamond.xspectra.in results/$prefix.xspectra.in prefix "'$prefix'"
-xanes_crystal $prefix.scf.in C_PBE_TM_2pj.UPF $prefix.xspectra.in
+./xanes_crystal $prefix.scf.in C_PBE_TM_2pj.UPF $prefix.xspectra.in
