@@ -12,60 +12,58 @@
 ##$ -l h_data=1G
 
 # runtime of vs number of atoms
-# nat = 10
-./scf aC1_10.scf.in
-./xanes aC1_10.scf.in
-# nat = 20
-./scf aC1_20.scf.in
-./xanes aC1_20.scf.in
-# nat = 30
-./scf aC1_50.scf.in
-./xanes aC1_50.scf.in
-# nat = 100
-./scf aC1_100.scf.in
-./xanes aC1_100.scf.in
-# nat = 261
-./scf aC1_261.scf.in
-./xanes aC1_261.scf.in
+nat=(10 20 50 100 261)
+for n in "$nat[@]"; do
+    # save name
+    prefix="aC1_$n"
+    # copy and modifiy aC1 scf file
+    cp results/aC1.scf.in results/$prefix.scf.in
+    ./change results/$prefix.scf.in nat $n 
+    ./change results/$prefix.scf.in prefix "'$prefix'"
+    # copy and modify aC1 xspectra file
+    cp results/aC1.xspectra.in results/$prefix.xspectra.in
+    ./change results/$prefix.xspectra.in prefix "'$prefix'"
+    ./change results/$prefix.xspectra.in filecore "'$prefix.wfc'"
+    # run calculations
+    ./scf $prefix.scf.in C_PBE_TM_2pj.UPF
+    ./xanes $prefix.xspectra.in
+done
 
-# diamond vs xgamma
-# xgamma = 0.4
-./scf diamond_0.4.scf.in C_PBE_TM_2pj.UPF
-./xanes diamond_0.4.xspectra.in
-# xgamma = 0.8
-./scf diamond_0.8.scf.in C_PBE_TM_2pj.UPF
-./xanes diamond_0.8.xspectra.in
-# xgamma = 1
-./scf diamond_1.scf.in C_PBE_TM_2pj.UPF
-./xanes diamond_1.xspectra.in
+# diamond vs xgamma 
+scf diamond.scf.in C_PBE_TM_2pj.UPF
+xgamma=(0.4 0.8 1)
+for x in "$xgamma[@]"; do
+    prefix="diamond_$x"
+    cp results/diamond.xspectra.in results/$prefix.xspectra.in
+    ./change results/$prefix.xspectra.in prefix "'$prefix'"
+    ./xanes $prefix.xspectra.in
+done  
 
 # carbon vs xgamma 
-# xgamma = 0.4
-./scf aC_0.4.scf.in C_PBE_TM_2pj.UPF
-./xanes aC_0.4.xspectra.in
-# xgamma = 0.8
-./scf aC_0.8.scf.in C_PBE_TM_2pj.UPF
-./xanes aC_0.8.xspectra.in
-# xgamma = 1.5
-./scf aC_1.5.scf.in C_PBE_TM_2pj.UPF
-./xanes aC_0.4.xspectra.in
-# xgamma = 2
-./scf aC_2.scf.in C_PBE_TM_2pj.UPF
-./xanes aC_2.xspectra.in
-# xgamma = 3
-./scf aC_3.scf.in C_PBE_TM_2pj.UPF
-./xanes aC_3.xspectra.in
+scf aC.scf.in C_PBE_TM_2pj.UPF
+xgamma=(0.4 0.8 1.5 2 3)
+for x in "$xgamma[@]"; do
+    prefix="aC_$x"
+    cp results/aC.xspectra.in results/$prefix.xspectra.in
+    ./change results/$prefix.xspectra.in prefix "'$prefix'"
+    ./xanes $prefix.xspectra.in
+done 
 
 # average carbon 
-# xgamma = 0.8
-./xanes_amorphous a-C.scf.in C_PBE_TM_2pj.UPF a-C.xspectra.in
-# xgamma = 1.5
-./change a-C.xspectra.in xgamma 1.5
-./xanes_amorphous a-C.scf.in C_PBE_TM_2pj.UPF a-C.xspectra.in
-# xgamma = 2
-./change a-C.xspectra.in xgamma 2
-./xanes_amorphous a-C.scf.in C_PBE_TM_2pj.UPF a-C.xspectra.in
+xgamma=(0.8 1.5 2)
+for x in "$xgamma[@]"; do
+    prefix="avg_aC_$x"
+    cp results/aC.scf.in results/$prefix.scf.in
+    ./change results/$prefix.scf.in prefix "'$prefix'"
+    cp results/aC.xspectra.in results/$prefix.xspectra.in
+    ./change results/$prefix.xspectra.in prefix "'$prefix'"
+    ./xanes_amorphous $prefix.scf.in C_PBE_TM_2pj.UPF $prefix.xspectra.in
+done 
 
-# average diamond
-# xgamma = 0.8
-./xanes_crystal diamond.scf.in C_PBE_TM_2pj.UPF diamond.xspectra.in
+# average diamond 
+prefix="avg_diamond_0.8"
+cp results/diamond.scf.in results/$prefix.scf.in
+./change results/$prefix.scf.in prefix "'$prefix'"
+cp results/diamond.xspectra.in results/$prefix.xspectra.in
+./change results/$prefix.xspectra.in prefix "'$prefix'"
+./xanes_crystal $prefix.scf.in C_PBE_TM_2pj.UPF $prefix.xspectra.in
