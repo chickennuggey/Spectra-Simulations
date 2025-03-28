@@ -1,0 +1,957 @@
+
+     Program XSpectra v.7.3.1 starts on 27Mar2025 at 21:26:48 
+
+     This program is part of the open-source Quantum ESPRESSO suite
+     for quantum simulation of materials; please cite
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 21 395502 (2009);
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 29 465901 (2017);
+         "P. Giannozzi et al., J. Chem. Phys. 152 154105 (2020);
+          URL http://www.quantum-espresso.org", 
+     in publications or presentations arising from this work. More details at
+     http://www.quantum-espresso.org/quote
+
+     Parallel version (MPI), running on     1 processors
+
+     MPI processes distributed on     1 nodes
+     7157 MiB available memory on the printing compute node when the environment starts
+ 
+
+     -------------------------------------------------------------------------
+                    __  ____                 _
+                    \ \/ / _\_ __   ___  ___| |_ _ __ __ _
+                     \  /\ \| '_ \ / _ \/ __| __| \__/ _\ |
+                     /  \_\ \ |_) |  __/ (__| |_| | | (_| |
+                    /_/\_\__/ .__/ \___|\___|\__|_|  \__,_|
+                            |_|
+
+     In publications arising from the use of XSpectra, please cite:
+      - O. Bunau and M. Calandra,
+        Phys. Rev. B 87, 205105 (2013)
+      - Ch. Gougoussis, M. Calandra, A. P. Seitsonen, F. Mauri,
+        Phys. Rev. B 80, 075102 (2009)
+      - M. Taillefumier, D. Cabaret, A. M. Flank, and F. Mauri,
+        Phys. Rev. B 66, 195107 (2002)
+
+     -------------------------------------------------------------------------
+                                Reading input_file
+     -------------------------------------------------------------------------
+
+     calculation: xanes_dipole
+
+     xepsilon  [crystallographic coordinates]:   1.000000   0.000000   0.000000
+
+     xonly_plot: FALSE
+        => complete calculation: Lanczos + spectrum plot
+
+     filecore (core-wavefunction file): diamond.wfc         
+ 
+     main plot parameters:
+        cut_occ_states: FALSE
+        gamma_mode:  constant
+        -> using xgamma [eV]:  0.80
+        xemin [eV]: -10.00
+        xemax [eV]:  30.00
+        xnepoint:  300
+        energy zero automatically set to the Fermi level
+
+     Fermi level determined from SCF save directory (diamond.save)
+     NB: For an insulator (SCF calculated with occupations="fixed")
+         the Fermi level will be placed at the position of HOMO.
+ 
+     WARNING: variable ef_r is obsolete
+
+     -------------------------------------------------------------------------
+                      Reading SCF save directory: diamond.save
+     -------------------------------------------------------------------------
+
+
+     Reading xml data from directory:
+
+     /u/home/n/nbriana/qe-7.3.1/XSpectra/test/results/tmp/diamond.save/
+
+     IMPORTANT: XC functional enforced from input :
+     Exchange-correlation= PBE
+                           (   1   4   3   4   0   0   0)
+     Any further DFT definition will be discarded
+     Please, verify this is what you really want
+
+ 
+     G-vector sticks info
+     --------------------
+     sticks:   dense  smooth     PW     G-vecs:    dense   smooth      PW
+     Sum         577     577    185                10443    10443    1863
+ 
+     Using Slab Decomposition
+ 
+     Reading collected, re-writing distributed wavefunctions
+
+     -------------------------------------------------------------------------
+                           Getting the Fermi energy 
+     -------------------------------------------------------------------------
+
+     From SCF save directory:
+        ehomo [eV]:   12.7945 (highest occupied level)
+        No LUMO value in SCF calculation
+        ef    [eV]:   12.7945
+
+     -> ef (in eV) will be written in x_save_file
+
+     -------------------------------------------------------------------------
+                           Energy zero of the spectrum 
+     -------------------------------------------------------------------------
+
+     -> ef will be used as energy zero of the spectrum
+ 
+     G-vector sticks info
+     --------------------
+     sticks:   dense  smooth     PW     G-vecs:    dense   smooth      PW
+     Sum         577     577    221                10443    10443    2373
+ 
+     Using Slab Decomposition
+ 
+
+
+     bravais-lattice index     =            1
+     lattice parameter (alat)  =       6.7403  a.u.
+     unit-cell volume          =     306.2169 (a.u.)^3
+     number of atoms/cell      =            8
+     number of atomic types    =            2
+     number of electrons       =        32.00
+     number of Kohn-Sham states=           16
+     kinetic-energy cutoff     =      40.0000  Ry
+     charge density cutoff     =     160.0000  Ry
+     Exchange-correlation= PBE
+                           (   1   4   3   4   0   0   0)
+
+     celldm(1)=   6.740256  celldm(2)=   0.000000  celldm(3)=   0.000000
+     celldm(4)=   0.000000  celldm(5)=   0.000000  celldm(6)=   0.000000
+
+     crystal axes: (cart. coord. in units of alat)
+               a(1) = (   1.000000   0.000000   0.000000 )  
+               a(2) = (   0.000000   1.000000   0.000000 )  
+               a(3) = (   0.000000   0.000000   1.000000 )  
+
+     reciprocal axes: (cart. coord. in units 2 pi/alat)
+               b(1) = (  1.000000  0.000000  0.000000 )  
+               b(2) = (  0.000000  1.000000  0.000000 )  
+               b(3) = (  0.000000  0.000000  1.000000 )  
+
+
+     PseudoPot. # 1 for C  read from file:
+     /u/home/n/nbriana/qe-7.3.1/XSpectra/test/pseudo/Ch_PBE_TM_2pj.UPF
+     MD5 check sum: ef0cb3dee31bd9e4ba2a832a2c716264
+     Pseudo is Norm-conserving, Zval =  5.0
+     Generated by new atomic code, or converted to UPF format
+     Using radial grid of 1073 points,  1 beta functions with: 
+                l(1) =   0
+
+     PseudoPot. # 2 for C  read from file:
+     /u/home/n/nbriana/qe-7.3.1/XSpectra/test/pseudo/C_PBE_TM_2pj.UPF
+     MD5 check sum: e8858615eb0a4b79f05373b4879fdf67
+     Pseudo is Norm-conserving, Zval =  4.0
+     Generated by new atomic code, or converted to UPF format
+     Using radial grid of 1073 points,  1 beta functions with: 
+                l(1) =   0
+
+     atomic species   valence    mass     pseudopotential
+     C_h               5.00    12.00000     C ( 1.00)
+     C                 4.00    12.00000     C ( 1.00)
+
+     24 Sym. Ops. (no inversion) found
+
+
+
+   Cartesian axes
+
+     site n.     atom                  positions (alat units)
+         1        C      tau(   1) = (   0.0000000   0.0000000   0.0000000  )
+         2        C      tau(   2) = (   0.0000000   0.5000000   0.5000000  )
+         3        C      tau(   3) = (   0.5000000   0.0000000   0.5000000  )
+         4        C      tau(   4) = (   0.5000000   0.5000000   0.0000000  )
+         5        C      tau(   5) = (   0.7500000   0.7500000   0.2500000  )
+         6        C      tau(   6) = (   0.7500000   0.2500000   0.7500000  )
+         7        C      tau(   7) = (   0.2500000   0.7500000   0.7500000  )
+         8        C_h    tau(   8) = (   0.2500000   0.2500000   0.2500000  )
+
+     number of k points=    64
+                       cart. coord. in units 2pi/alat
+        k(    1) = (   0.1250000   0.1250000   0.1250000), wk =   0.0312500
+        k(    2) = (   0.1250000   0.1250000   0.3750000), wk =   0.0312500
+        k(    3) = (   0.1250000   0.1250000   0.6250000), wk =   0.0312500
+        k(    4) = (   0.1250000   0.1250000   0.8750000), wk =   0.0312500
+        k(    5) = (   0.1250000   0.3750000   0.1250000), wk =   0.0312500
+        k(    6) = (   0.1250000   0.3750000   0.3750000), wk =   0.0312500
+        k(    7) = (   0.1250000   0.3750000   0.6250000), wk =   0.0312500
+        k(    8) = (   0.1250000   0.3750000   0.8750000), wk =   0.0312500
+        k(    9) = (   0.1250000   0.6250000   0.1250000), wk =   0.0312500
+        k(   10) = (   0.1250000   0.6250000   0.3750000), wk =   0.0312500
+        k(   11) = (   0.1250000   0.6250000   0.6250000), wk =   0.0312500
+        k(   12) = (   0.1250000   0.6250000   0.8750000), wk =   0.0312500
+        k(   13) = (   0.1250000   0.8750000   0.1250000), wk =   0.0312500
+        k(   14) = (   0.1250000   0.8750000   0.3750000), wk =   0.0312500
+        k(   15) = (   0.1250000   0.8750000   0.6250000), wk =   0.0312500
+        k(   16) = (   0.1250000   0.8750000   0.8750000), wk =   0.0312500
+        k(   17) = (   0.3750000   0.1250000   0.1250000), wk =   0.0312500
+        k(   18) = (   0.3750000   0.1250000   0.3750000), wk =   0.0312500
+        k(   19) = (   0.3750000   0.1250000   0.6250000), wk =   0.0312500
+        k(   20) = (   0.3750000   0.1250000   0.8750000), wk =   0.0312500
+        k(   21) = (   0.3750000   0.3750000   0.1250000), wk =   0.0312500
+        k(   22) = (   0.3750000   0.3750000   0.3750000), wk =   0.0312500
+        k(   23) = (   0.3750000   0.3750000   0.6250000), wk =   0.0312500
+        k(   24) = (   0.3750000   0.3750000   0.8750000), wk =   0.0312500
+        k(   25) = (   0.3750000   0.6250000   0.1250000), wk =   0.0312500
+        k(   26) = (   0.3750000   0.6250000   0.3750000), wk =   0.0312500
+        k(   27) = (   0.3750000   0.6250000   0.6250000), wk =   0.0312500
+        k(   28) = (   0.3750000   0.6250000   0.8750000), wk =   0.0312500
+        k(   29) = (   0.3750000   0.8750000   0.1250000), wk =   0.0312500
+        k(   30) = (   0.3750000   0.8750000   0.3750000), wk =   0.0312500
+        k(   31) = (   0.3750000   0.8750000   0.6250000), wk =   0.0312500
+        k(   32) = (   0.3750000   0.8750000   0.8750000), wk =   0.0312500
+        k(   33) = (   0.6250000   0.1250000   0.1250000), wk =   0.0312500
+        k(   34) = (   0.6250000   0.1250000   0.3750000), wk =   0.0312500
+        k(   35) = (   0.6250000   0.1250000   0.6250000), wk =   0.0312500
+        k(   36) = (   0.6250000   0.1250000   0.8750000), wk =   0.0312500
+        k(   37) = (   0.6250000   0.3750000   0.1250000), wk =   0.0312500
+        k(   38) = (   0.6250000   0.3750000   0.3750000), wk =   0.0312500
+        k(   39) = (   0.6250000   0.3750000   0.6250000), wk =   0.0312500
+        k(   40) = (   0.6250000   0.3750000   0.8750000), wk =   0.0312500
+        k(   41) = (   0.6250000   0.6250000   0.1250000), wk =   0.0312500
+        k(   42) = (   0.6250000   0.6250000   0.3750000), wk =   0.0312500
+        k(   43) = (   0.6250000   0.6250000   0.6250000), wk =   0.0312500
+        k(   44) = (   0.6250000   0.6250000   0.8750000), wk =   0.0312500
+        k(   45) = (   0.6250000   0.8750000   0.1250000), wk =   0.0312500
+        k(   46) = (   0.6250000   0.8750000   0.3750000), wk =   0.0312500
+        k(   47) = (   0.6250000   0.8750000   0.6250000), wk =   0.0312500
+        k(   48) = (   0.6250000   0.8750000   0.8750000), wk =   0.0312500
+        k(   49) = (   0.8750000   0.1250000   0.1250000), wk =   0.0312500
+        k(   50) = (   0.8750000   0.1250000   0.3750000), wk =   0.0312500
+        k(   51) = (   0.8750000   0.1250000   0.6250000), wk =   0.0312500
+        k(   52) = (   0.8750000   0.1250000   0.8750000), wk =   0.0312500
+        k(   53) = (   0.8750000   0.3750000   0.1250000), wk =   0.0312500
+        k(   54) = (   0.8750000   0.3750000   0.3750000), wk =   0.0312500
+        k(   55) = (   0.8750000   0.3750000   0.6250000), wk =   0.0312500
+        k(   56) = (   0.8750000   0.3750000   0.8750000), wk =   0.0312500
+        k(   57) = (   0.8750000   0.6250000   0.1250000), wk =   0.0312500
+        k(   58) = (   0.8750000   0.6250000   0.3750000), wk =   0.0312500
+        k(   59) = (   0.8750000   0.6250000   0.6250000), wk =   0.0312500
+        k(   60) = (   0.8750000   0.6250000   0.8750000), wk =   0.0312500
+        k(   61) = (   0.8750000   0.8750000   0.1250000), wk =   0.0312500
+        k(   62) = (   0.8750000   0.8750000   0.3750000), wk =   0.0312500
+        k(   63) = (   0.8750000   0.8750000   0.6250000), wk =   0.0312500
+        k(   64) = (   0.8750000   0.8750000   0.8750000), wk =   0.0312500
+
+     Dense  grid:    10443 G-vectors     FFT dimensions: (  30,  30,  30)
+
+     Estimated max dynamical RAM per process >       6.75 MB
+
+     The potential is recalculated from file :
+     /u/home/n/nbriana/qe-7.3.1/XSpectra/test/results/tmp/diamond.save/charge-density
+
+     Starting wfcs are   64 atomic wfcs
+
+     -------------------------------------------------------------------------
+               Reading core wavefunction file for the absorbing atom
+     -------------------------------------------------------------------------
+
+     diamond.wfc successfully read
+
+     -------------------------------------------------------------------------
+                              Attributing the PAW radii 
+                     for the absorbing atom [units: Bohr radius]
+     -------------------------------------------------------------------------
+
+        PAW proj 1: r_paw(l= 0)= 2.25  (1.5*r_cut)
+        PAW proj 2: r_paw(l= 0)= 2.25  (1.5*r_cut)
+ 
+        NB: The calculation will not necessary use all these r_paw values.
+            - For a edge in the electric-dipole approximation,
+              only the r_paw(l=1) values are used.
+            - For a K edge in the electric-quadrupole approximation,
+              only the r_paw(l=2) values are used.
+
+            - For a L2 or L3 edge in the electric-quadrupole approximation,
+
+              all projectors (s, p and d) are used.
+
+
+     -------------------------------------------------------------------------
+                          Starting XANES calculation
+                     in the electric dipole approximation
+     -------------------------------------------------------------------------
+
+     Method of calculation based on the Lanczos recursion algorithm
+     --------------------------------------------------------------
+        - STEP 1: Construction of a kpoint-dependent Lanczos basis,
+          in which the Hamiltonian is tridiagonal (each 'iter' 
+          corresponds to the calculation of one more Lanczos vector)
+        - STEP 2: Calculation of the cross-section as a continued fraction
+          averaged over the k-points.
+
+     ... Begin STEP 1 ...
+
+        Radial transition matrix element(s) used in the calculation of the
+        initial vector of the Lanczos basis (|tilde{phi}_abs> normalized)
+        | For PAW proj. (l=1) #1: radial matrix element =   0.198945101
+        | For PAW proj. (l=1) #2: radial matrix element =   0.210306212
+ 
+        |-------------------------------------------------------------
+        ! k-point #     1:  ( 0.1250,  0.1250,  0.1250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411325E+00
+        |   Estimated error at iter     50:   1.00436318
+        |   Estimated error at iter    100:   0.10368895
+        |   Estimated error at iter    150:   0.00739089
+        !   => CONVERGED at iter    200 with error=  0.00026422
+        |-------------------------------------------------------------
+        ! k-point #     2:  ( 0.1250,  0.1250,  0.3750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411310E+00
+        |   Estimated error at iter     50:   1.00446916
+        |   Estimated error at iter    100:   0.13381238
+        |   Estimated error at iter    150:   0.05947709
+        |   Estimated error at iter    200:   0.00583900
+        |   Estimated error at iter    250:   0.00104727
+        !   => CONVERGED at iter    300 with error=  0.00006143
+        |-------------------------------------------------------------
+        ! k-point #     3:  ( 0.1250,  0.1250,  0.6250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411310E+00
+        |   Estimated error at iter     50:   1.00446916
+        |   Estimated error at iter    100:   0.13381238
+        |   Estimated error at iter    150:   0.05947710
+        |   Estimated error at iter    200:   0.00583900
+        |   Estimated error at iter    250:   0.00105075
+        !   => CONVERGED at iter    300 with error=  0.00008007
+        |-------------------------------------------------------------
+        ! k-point #     4:  ( 0.1250,  0.1250,  0.8750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411325E+00
+        |   Estimated error at iter     50:   1.00436318
+        |   Estimated error at iter    100:   0.10368895
+        |   Estimated error at iter    150:   0.00739093
+        !   => CONVERGED at iter    200 with error=  0.00026467
+        |-------------------------------------------------------------
+        ! k-point #     5:  ( 0.1250,  0.3750,  0.1250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411310E+00
+        |   Estimated error at iter     50:   1.00446916
+        |   Estimated error at iter    100:   0.13381238
+        |   Estimated error at iter    150:   0.05947711
+        |   Estimated error at iter    200:   0.00583907
+        |   Estimated error at iter    250:   0.00104704
+        !   => CONVERGED at iter    300 with error=  0.00006058
+        |-------------------------------------------------------------
+        ! k-point #     6:  ( 0.1250,  0.3750,  0.3750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411274E+00
+        |   Estimated error at iter     50:   1.00437635
+        |   Estimated error at iter    100:   0.19859963
+        |   Estimated error at iter    150:   0.01096350
+        !   => CONVERGED at iter    200 with error=  0.00082081
+        |-------------------------------------------------------------
+        ! k-point #     7:  ( 0.1250,  0.3750,  0.6250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411274E+00
+        |   Estimated error at iter     50:   1.00437635
+        |   Estimated error at iter    100:   0.19859963
+        |   Estimated error at iter    150:   0.01095395
+        !   => CONVERGED at iter    200 with error=  0.00082531
+        |-------------------------------------------------------------
+        ! k-point #     8:  ( 0.1250,  0.3750,  0.8750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411310E+00
+        |   Estimated error at iter     50:   1.00446916
+        |   Estimated error at iter    100:   0.13381238
+        |   Estimated error at iter    150:   0.05947708
+        |   Estimated error at iter    200:   0.00583894
+        |   Estimated error at iter    250:   0.00104389
+        !   => CONVERGED at iter    300 with error=  0.00006678
+        |-------------------------------------------------------------
+        ! k-point #     9:  ( 0.1250,  0.6250,  0.1250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411310E+00
+        |   Estimated error at iter     50:   1.00446916
+        |   Estimated error at iter    100:   0.13381238
+        |   Estimated error at iter    150:   0.05947717
+        |   Estimated error at iter    200:   0.00583910
+        |   Estimated error at iter    250:   0.00104910
+        !   => CONVERGED at iter    300 with error=  0.00008132
+        |-------------------------------------------------------------
+        ! k-point #    10:  ( 0.1250,  0.6250,  0.3750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411274E+00
+        |   Estimated error at iter     50:   1.00437635
+        |   Estimated error at iter    100:   0.19859963
+        |   Estimated error at iter    150:   0.01096349
+        !   => CONVERGED at iter    200 with error=  0.00081479
+        |-------------------------------------------------------------
+        ! k-point #    11:  ( 0.1250,  0.6250,  0.6250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411274E+00
+        |   Estimated error at iter     50:   1.00437635
+        |   Estimated error at iter    100:   0.19859963
+        |   Estimated error at iter    150:   0.01096321
+        !   => CONVERGED at iter    200 with error=  0.00082098
+        |-------------------------------------------------------------
+        ! k-point #    12:  ( 0.1250,  0.6250,  0.8750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411310E+00
+        |   Estimated error at iter     50:   1.00446916
+        |   Estimated error at iter    100:   0.13381238
+        |   Estimated error at iter    150:   0.05947704
+        |   Estimated error at iter    200:   0.00583888
+        |   Estimated error at iter    250:   0.00105107
+        !   => CONVERGED at iter    300 with error=  0.00007939
+        |-------------------------------------------------------------
+        ! k-point #    13:  ( 0.1250,  0.8750,  0.1250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411325E+00
+        |   Estimated error at iter     50:   1.00436318
+        |   Estimated error at iter    100:   0.10368895
+        |   Estimated error at iter    150:   0.00739083
+        !   => CONVERGED at iter    200 with error=  0.00026447
+        |-------------------------------------------------------------
+        ! k-point #    14:  ( 0.1250,  0.8750,  0.3750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411310E+00
+        |   Estimated error at iter     50:   1.00446916
+        |   Estimated error at iter    100:   0.13381238
+        |   Estimated error at iter    150:   0.05947692
+        |   Estimated error at iter    200:   0.00583882
+        |   Estimated error at iter    250:   0.00104660
+        !   => CONVERGED at iter    300 with error=  0.00005961
+        |-------------------------------------------------------------
+        ! k-point #    15:  ( 0.1250,  0.8750,  0.6250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411310E+00
+        |   Estimated error at iter     50:   1.00446916
+        |   Estimated error at iter    100:   0.13381238
+        |   Estimated error at iter    150:   0.05947673
+        |   Estimated error at iter    200:   0.00583850
+        |   Estimated error at iter    250:   0.00103804
+        !   => CONVERGED at iter    300 with error=  0.00005330
+        |-------------------------------------------------------------
+        ! k-point #    16:  ( 0.1250,  0.8750,  0.8750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411325E+00
+        |   Estimated error at iter     50:   1.00436318
+        |   Estimated error at iter    100:   0.10368895
+        |   Estimated error at iter    150:   0.00739087
+        !   => CONVERGED at iter    200 with error=  0.00026446
+        |-------------------------------------------------------------
+        ! k-point #    17:  ( 0.3750,  0.1250,  0.1250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411276E+00
+        |   Estimated error at iter     50:   1.00449449
+        |   Estimated error at iter    100:   0.22391970
+        |   Estimated error at iter    150:   0.02916687
+        |   Estimated error at iter    200:   0.00163222
+        !   => CONVERGED at iter    250 with error=  0.00000000
+        |-------------------------------------------------------------
+        ! k-point #    18:  ( 0.3750,  0.1250,  0.3750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411238E+00
+        |   Estimated error at iter     50:   1.00451117
+        |   Estimated error at iter    100:   0.14333118
+        |   Estimated error at iter    150:   0.03091742
+        |   Estimated error at iter    200:   0.00720144
+        !   => CONVERGED at iter    250 with error=  0.00022012
+        |-------------------------------------------------------------
+        ! k-point #    19:  ( 0.3750,  0.1250,  0.6250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411238E+00
+        |   Estimated error at iter     50:   1.00451117
+        |   Estimated error at iter    100:   0.14333118
+        |   Estimated error at iter    150:   0.03091739
+        |   Estimated error at iter    200:   0.00721878
+        !   => CONVERGED at iter    250 with error=  0.00023948
+        |-------------------------------------------------------------
+        ! k-point #    20:  ( 0.3750,  0.1250,  0.8750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411276E+00
+        |   Estimated error at iter     50:   1.00449449
+        |   Estimated error at iter    100:   0.22391970
+        |   Estimated error at iter    150:   0.02927331
+        !   => CONVERGED at iter    200 with error=  0.00098959
+        |-------------------------------------------------------------
+        ! k-point #    21:  ( 0.3750,  0.3750,  0.1250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411238E+00
+        |   Estimated error at iter     50:   1.00451117
+        |   Estimated error at iter    100:   0.14333118
+        |   Estimated error at iter    150:   0.03091732
+        |   Estimated error at iter    200:   0.00721884
+        !   => CONVERGED at iter    250 with error=  0.00024283
+        |-------------------------------------------------------------
+        ! k-point #    22:  ( 0.3750,  0.3750,  0.3750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411279E+00
+        |   Estimated error at iter     50:   1.00458096
+        |   Estimated error at iter    100:   0.12601624
+        |   Estimated error at iter    150:   0.00953505
+        !   => CONVERGED at iter    200 with error=  0.00012026
+        |-------------------------------------------------------------
+        ! k-point #    23:  ( 0.3750,  0.3750,  0.6250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411279E+00
+        |   Estimated error at iter     50:   1.00458096
+        |   Estimated error at iter    100:   0.12601624
+        |   Estimated error at iter    150:   0.00953517
+        !   => CONVERGED at iter    200 with error=  0.00012044
+        |-------------------------------------------------------------
+        ! k-point #    24:  ( 0.3750,  0.3750,  0.8750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411238E+00
+        |   Estimated error at iter     50:   1.00451117
+        |   Estimated error at iter    100:   0.14333118
+        |   Estimated error at iter    150:   0.03091732
+        |   Estimated error at iter    200:   0.00721591
+        !   => CONVERGED at iter    250 with error=  0.00022332
+        |-------------------------------------------------------------
+        ! k-point #    25:  ( 0.3750,  0.6250,  0.1250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411238E+00
+        |   Estimated error at iter     50:   1.00451117
+        |   Estimated error at iter    100:   0.14333118
+        |   Estimated error at iter    150:   0.03091734
+        |   Estimated error at iter    200:   0.00721799
+        !   => CONVERGED at iter    250 with error=  0.00023396
+        |-------------------------------------------------------------
+        ! k-point #    26:  ( 0.3750,  0.6250,  0.3750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411279E+00
+        |   Estimated error at iter     50:   1.00458096
+        |   Estimated error at iter    100:   0.12601624
+        |   Estimated error at iter    150:   0.00953503
+        !   => CONVERGED at iter    200 with error=  0.00012044
+        |-------------------------------------------------------------
+        ! k-point #    27:  ( 0.3750,  0.6250,  0.6250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411279E+00
+        |   Estimated error at iter     50:   1.00458096
+        |   Estimated error at iter    100:   0.12601624
+        |   Estimated error at iter    150:   0.00953513
+        !   => CONVERGED at iter    200 with error=  0.00012038
+        |-------------------------------------------------------------
+        ! k-point #    28:  ( 0.3750,  0.6250,  0.8750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411238E+00
+        |   Estimated error at iter     50:   1.00451117
+        |   Estimated error at iter    100:   0.14333118
+        |   Estimated error at iter    150:   0.03091739
+        |   Estimated error at iter    200:   0.00721767
+        !   => CONVERGED at iter    250 with error=  0.00023105
+        |-------------------------------------------------------------
+        ! k-point #    29:  ( 0.3750,  0.8750,  0.1250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411276E+00
+        |   Estimated error at iter     50:   1.00449449
+        |   Estimated error at iter    100:   0.22391970
+        |   Estimated error at iter    150:   0.02921337
+        |   Estimated error at iter    200:   0.00139318
+        !   => CONVERGED at iter    250 with error=  0.00000000
+        |-------------------------------------------------------------
+        ! k-point #    30:  ( 0.3750,  0.8750,  0.3750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411238E+00
+        |   Estimated error at iter     50:   1.00451117
+        |   Estimated error at iter    100:   0.14333118
+        |   Estimated error at iter    150:   0.03091739
+        |   Estimated error at iter    200:   0.00721877
+        !   => CONVERGED at iter    250 with error=  0.00023936
+        |-------------------------------------------------------------
+        ! k-point #    31:  ( 0.3750,  0.8750,  0.6250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411238E+00
+        |   Estimated error at iter     50:   1.00451117
+        |   Estimated error at iter    100:   0.14333118
+        |   Estimated error at iter    150:   0.03091734
+        |   Estimated error at iter    200:   0.00721570
+        !   => CONVERGED at iter    250 with error=  0.00022226
+        |-------------------------------------------------------------
+        ! k-point #    32:  ( 0.3750,  0.8750,  0.8750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411276E+00
+        |   Estimated error at iter     50:   1.00449449
+        |   Estimated error at iter    100:   0.22391970
+        |   Estimated error at iter    150:   0.02923247
+        |   Estimated error at iter    200:   0.00113497
+        !   => CONVERGED at iter    250 with error=  0.00000000
+        |-------------------------------------------------------------
+        ! k-point #    33:  ( 0.6250,  0.1250,  0.1250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411276E+00
+        |   Estimated error at iter     50:   1.00449449
+        |   Estimated error at iter    100:   0.22391970
+        |   Estimated error at iter    150:   0.02918902
+        |   Estimated error at iter    200:   0.00145290
+        !   => CONVERGED at iter    250 with error=  0.00000000
+        |-------------------------------------------------------------
+        ! k-point #    34:  ( 0.6250,  0.1250,  0.3750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411238E+00
+        |   Estimated error at iter     50:   1.00451117
+        |   Estimated error at iter    100:   0.14333118
+        |   Estimated error at iter    150:   0.03091733
+        |   Estimated error at iter    200:   0.00721807
+        !   => CONVERGED at iter    250 with error=  0.00023453
+        |-------------------------------------------------------------
+        ! k-point #    35:  ( 0.6250,  0.1250,  0.6250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411238E+00
+        |   Estimated error at iter     50:   1.00451117
+        |   Estimated error at iter    100:   0.14333118
+        |   Estimated error at iter    150:   0.03091732
+        |   Estimated error at iter    200:   0.00721840
+        !   => CONVERGED at iter    250 with error=  0.00023761
+        |-------------------------------------------------------------
+        ! k-point #    36:  ( 0.6250,  0.1250,  0.8750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411276E+00
+        |   Estimated error at iter     50:   1.00449449
+        |   Estimated error at iter    100:   0.22391970
+        |   Estimated error at iter    150:   0.02921110
+        |   Estimated error at iter    200:   0.00128117
+        !   => CONVERGED at iter    250 with error=  0.00000000
+        |-------------------------------------------------------------
+        ! k-point #    37:  ( 0.6250,  0.3750,  0.1250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411238E+00
+        |   Estimated error at iter     50:   1.00451117
+        |   Estimated error at iter    100:   0.14333118
+        |   Estimated error at iter    150:   0.03091735
+        |   Estimated error at iter    200:   0.00721796
+        !   => CONVERGED at iter    250 with error=  0.00023334
+        |-------------------------------------------------------------
+        ! k-point #    38:  ( 0.6250,  0.3750,  0.3750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411279E+00
+        |   Estimated error at iter     50:   1.00458096
+        |   Estimated error at iter    100:   0.12601624
+        |   Estimated error at iter    150:   0.00953509
+        !   => CONVERGED at iter    200 with error=  0.00012037
+        |-------------------------------------------------------------
+        ! k-point #    39:  ( 0.6250,  0.3750,  0.6250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411279E+00
+        |   Estimated error at iter     50:   1.00458096
+        |   Estimated error at iter    100:   0.12601624
+        |   Estimated error at iter    150:   0.00953499
+        !   => CONVERGED at iter    200 with error=  0.00012085
+        |-------------------------------------------------------------
+        ! k-point #    40:  ( 0.6250,  0.3750,  0.8750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411238E+00
+        |   Estimated error at iter     50:   1.00451117
+        |   Estimated error at iter    100:   0.14333118
+        |   Estimated error at iter    150:   0.03091744
+        |   Estimated error at iter    200:   0.00721888
+        !   => CONVERGED at iter    250 with error=  0.00024009
+        |-------------------------------------------------------------
+        ! k-point #    41:  ( 0.6250,  0.6250,  0.1250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411238E+00
+        |   Estimated error at iter     50:   1.00451117
+        |   Estimated error at iter    100:   0.14333118
+        |   Estimated error at iter    150:   0.03091733
+        |   Estimated error at iter    200:   0.00721639
+        !   => CONVERGED at iter    250 with error=  0.00022499
+        |-------------------------------------------------------------
+        ! k-point #    42:  ( 0.6250,  0.6250,  0.3750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411279E+00
+        |   Estimated error at iter     50:   1.00458096
+        |   Estimated error at iter    100:   0.12601624
+        |   Estimated error at iter    150:   0.00953507
+        !   => CONVERGED at iter    200 with error=  0.00012063
+        |-------------------------------------------------------------
+        ! k-point #    43:  ( 0.6250,  0.6250,  0.6250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411279E+00
+        |   Estimated error at iter     50:   1.00458096
+        |   Estimated error at iter    100:   0.12601624
+        |   Estimated error at iter    150:   0.00953507
+        !   => CONVERGED at iter    200 with error=  0.00012030
+        |-------------------------------------------------------------
+        ! k-point #    44:  ( 0.6250,  0.6250,  0.8750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411238E+00
+        |   Estimated error at iter     50:   1.00451117
+        |   Estimated error at iter    100:   0.14333118
+        |   Estimated error at iter    150:   0.03091734
+        |   Estimated error at iter    200:   0.00721826
+        !   => CONVERGED at iter    250 with error=  0.00023582
+        |-------------------------------------------------------------
+        ! k-point #    45:  ( 0.6250,  0.8750,  0.1250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411276E+00
+        |   Estimated error at iter     50:   1.00449449
+        |   Estimated error at iter    100:   0.22391970
+        |   Estimated error at iter    150:   0.02928471
+        |   Estimated error at iter    200:   0.00107355
+        !   => CONVERGED at iter    250 with error=  0.00000000
+        |-------------------------------------------------------------
+        ! k-point #    46:  ( 0.6250,  0.8750,  0.3750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411238E+00
+        |   Estimated error at iter     50:   1.00451117
+        |   Estimated error at iter    100:   0.14333118
+        |   Estimated error at iter    150:   0.03091733
+        |   Estimated error at iter    200:   0.00721909
+        !   => CONVERGED at iter    250 with error=  0.00024540
+        |-------------------------------------------------------------
+        ! k-point #    47:  ( 0.6250,  0.8750,  0.6250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411238E+00
+        |   Estimated error at iter     50:   1.00451117
+        |   Estimated error at iter    100:   0.14333118
+        |   Estimated error at iter    150:   0.03091735
+        |   Estimated error at iter    200:   0.00721893
+        !   => CONVERGED at iter    250 with error=  0.00024312
+        |-------------------------------------------------------------
+        ! k-point #    48:  ( 0.6250,  0.8750,  0.8750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411276E+00
+        |   Estimated error at iter     50:   1.00449449
+        |   Estimated error at iter    100:   0.22391970
+        |   Estimated error at iter    150:   0.02921250
+        |   Estimated error at iter    200:   0.00138604
+        !   => CONVERGED at iter    250 with error=  0.00000000
+        |-------------------------------------------------------------
+        ! k-point #    49:  ( 0.8750,  0.1250,  0.1250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411325E+00
+        |   Estimated error at iter     50:   1.00436318
+        |   Estimated error at iter    100:   0.10368895
+        |   Estimated error at iter    150:   0.00739083
+        !   => CONVERGED at iter    200 with error=  0.00026470
+        |-------------------------------------------------------------
+        ! k-point #    50:  ( 0.8750,  0.1250,  0.3750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411310E+00
+        |   Estimated error at iter     50:   1.00446916
+        |   Estimated error at iter    100:   0.13381238
+        |   Estimated error at iter    150:   0.05947711
+        |   Estimated error at iter    200:   0.00583893
+        |   Estimated error at iter    250:   0.00104781
+        !   => CONVERGED at iter    300 with error=  0.00007780
+        |-------------------------------------------------------------
+        ! k-point #    51:  ( 0.8750,  0.1250,  0.6250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411310E+00
+        |   Estimated error at iter     50:   1.00446916
+        |   Estimated error at iter    100:   0.13381238
+        |   Estimated error at iter    150:   0.05947714
+        |   Estimated error at iter    200:   0.00583910
+        |   Estimated error at iter    250:   0.00104473
+        !   => CONVERGED at iter    300 with error=  0.00006971
+        |-------------------------------------------------------------
+        ! k-point #    52:  ( 0.8750,  0.1250,  0.8750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411325E+00
+        |   Estimated error at iter     50:   1.00436318
+        |   Estimated error at iter    100:   0.10368895
+        |   Estimated error at iter    150:   0.00739083
+        !   => CONVERGED at iter    200 with error=  0.00026462
+        |-------------------------------------------------------------
+        ! k-point #    53:  ( 0.8750,  0.3750,  0.1250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411310E+00
+        |   Estimated error at iter     50:   1.00446916
+        |   Estimated error at iter    100:   0.13381238
+        |   Estimated error at iter    150:   0.05947717
+        |   Estimated error at iter    200:   0.00583910
+        |   Estimated error at iter    250:   0.00105148
+        !   => CONVERGED at iter    300 with error=  0.00007204
+        |-------------------------------------------------------------
+        ! k-point #    54:  ( 0.8750,  0.3750,  0.3750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411274E+00
+        |   Estimated error at iter     50:   1.00437635
+        |   Estimated error at iter    100:   0.19859963
+        |   Estimated error at iter    150:   0.01095900
+        !   => CONVERGED at iter    200 with error=  0.00082301
+        |-------------------------------------------------------------
+        ! k-point #    55:  ( 0.8750,  0.3750,  0.6250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411274E+00
+        |   Estimated error at iter     50:   1.00437635
+        |   Estimated error at iter    100:   0.19859963
+        |   Estimated error at iter    150:   0.01096556
+        !   => CONVERGED at iter    200 with error=  0.00081971
+        |-------------------------------------------------------------
+        ! k-point #    56:  ( 0.8750,  0.3750,  0.8750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411310E+00
+        |   Estimated error at iter     50:   1.00446916
+        |   Estimated error at iter    100:   0.13381238
+        |   Estimated error at iter    150:   0.05947673
+        |   Estimated error at iter    200:   0.00583842
+        |   Estimated error at iter    250:   0.00104594
+        !   => CONVERGED at iter    300 with error=  0.00007268
+        |-------------------------------------------------------------
+        ! k-point #    57:  ( 0.8750,  0.6250,  0.1250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411310E+00
+        |   Estimated error at iter     50:   1.00446916
+        |   Estimated error at iter    100:   0.13381238
+        |   Estimated error at iter    150:   0.05947716
+        |   Estimated error at iter    200:   0.00583916
+        |   Estimated error at iter    250:   0.00104702
+        !   => CONVERGED at iter    300 with error=  0.00007655
+        |-------------------------------------------------------------
+        ! k-point #    58:  ( 0.8750,  0.6250,  0.3750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411274E+00
+        |   Estimated error at iter     50:   1.00437635
+        |   Estimated error at iter    100:   0.19859963
+        |   Estimated error at iter    150:   0.01096403
+        !   => CONVERGED at iter    200 with error=  0.00082011
+        |-------------------------------------------------------------
+        ! k-point #    59:  ( 0.8750,  0.6250,  0.6250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411274E+00
+        |   Estimated error at iter     50:   1.00437635
+        |   Estimated error at iter    100:   0.19859963
+        |   Estimated error at iter    150:   0.01096483
+        !   => CONVERGED at iter    200 with error=  0.00081924
+        |-------------------------------------------------------------
+        ! k-point #    60:  ( 0.8750,  0.6250,  0.8750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411310E+00
+        |   Estimated error at iter     50:   1.00446916
+        |   Estimated error at iter    100:   0.13381238
+        |   Estimated error at iter    150:   0.05947708
+        |   Estimated error at iter    200:   0.00583901
+        |   Estimated error at iter    250:   0.00105213
+        !   => CONVERGED at iter    300 with error=  0.00007318
+        |-------------------------------------------------------------
+        ! k-point #    61:  ( 0.8750,  0.8750,  0.1250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411325E+00
+        |   Estimated error at iter     50:   1.00436318
+        |   Estimated error at iter    100:   0.10368895
+        |   Estimated error at iter    150:   0.00739115
+        !   => CONVERGED at iter    200 with error=  0.00026411
+        |-------------------------------------------------------------
+        ! k-point #    62:  ( 0.8750,  0.8750,  0.3750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411310E+00
+        |   Estimated error at iter     50:   1.00446916
+        |   Estimated error at iter    100:   0.13381238
+        |   Estimated error at iter    150:   0.05947687
+        |   Estimated error at iter    200:   0.00583881
+        |   Estimated error at iter    250:   0.00104991
+        !   => CONVERGED at iter    300 with error=  0.00006502
+        |-------------------------------------------------------------
+        ! k-point #    63:  ( 0.8750,  0.8750,  0.6250),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411310E+00
+        |   Estimated error at iter     50:   1.00446916
+        |   Estimated error at iter    100:   0.13381238
+        |   Estimated error at iter    150:   0.05947704
+        |   Estimated error at iter    200:   0.00583893
+        |   Estimated error at iter    250:   0.00104778
+        !   => CONVERGED at iter    300 with error=  0.00005279
+        |-------------------------------------------------------------
+        ! k-point #    64:  ( 0.8750,  0.8750,  0.8750),  0.0312,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.14411325E+00
+        |   Estimated error at iter     50:   1.00436318
+        |   Estimated error at iter    100:   0.10368895
+        |   Estimated error at iter    150:   0.00739082
+        !   => CONVERGED at iter    200 with error=  0.00026469
+
+     Results of STEP 1 successfully written in x_save_file
+     x_save_file name: 
+     ->  diamond.xspectra.sav                                             
+     x_save_file version:  2
+
+     ... End STEP 1 ...
+
+     ... Begin STEP 2 ...
+
+     The spectrum is calculated using the following parameters:
+        energy-zero of the spectrum [eV]:   12.7945
+        the occupied states are NOT eliminated from the spectrum
+        xemin [eV]: -10.00
+        xemax [eV]:  30.00
+        xnepoint:  300
+        constant broadening parameter [eV]:    0.800
+        Core level energy [eV]:  -284.2    
+         (from electron binding energy of neutral atoms in X-ray data booklet)
+
+     Cross-section successfully written in xanes.dat                                                                                                                                                                                                                                                       
+
+     ... End STEP 2 ...
+
+     xanes        :      9.93s CPU     10.27s WALL (       1 calls)
+
+     -------------------------------------------------------------------------
+                                END JOB XSpectra
+     -------------------------------------------------------------------------
+
