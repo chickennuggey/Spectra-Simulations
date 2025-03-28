@@ -54,7 +54,7 @@ def get_atom_type(atom_index, atom_types, atom_counts):
 
 
 def scf_input(vasp_file, prefix, pseudofile_list, absorbing_atom_type, absorbing_atom_index, 
-               ecutwfc = 30, pseudo_directory = '$PSEUDO_DIR/', out_directory = '$TMP_DIR/'):
+               ecutwfc = 30, tot_charge = 0, scf_must_converge = ".false.", pseudo_directory = '$PSEUDO_DIR/', out_directory = '$TMP_DIR/'):
     
     # description: converts VASP file into input for SCF calculations using pw.x for XANES
     # Notes: 
@@ -69,6 +69,8 @@ def scf_input(vasp_file, prefix, pseudofile_list, absorbing_atom_type, absorbing
     ## absorbing_atom_type: the type of absorbing atom, string 
     ## absorbing_atom_index: the index of the absorbing atom in the coordinates beginning at 0, numeric
     ## ecutwfc: defines maximum kinetic energy cutoff for plane waves, numeric  
+    ## tot_charge: total charge of the system, numeric
+    ## scf_must_converge: whether calculation should converge, string
     ## pseudo_directory: location of pseudopotential, string
     ## out_directory: location of where to place output files from scf calculation, string
 
@@ -82,7 +84,6 @@ def scf_input(vasp_file, prefix, pseudofile_list, absorbing_atom_type, absorbing
         line_number = 1
         for line in file:
             values = line.split() 
-
             try: 
                 n_values = list(map(float, values))
             except: 
@@ -132,20 +133,20 @@ def scf_input(vasp_file, prefix, pseudofile_list, absorbing_atom_type, absorbing
         if (line_number - 10) < absorbing_atom_index:
             raise ValueError("Invalid index for absorbing atom.")
 
+
     # match pseudofiles to atom type
+    atom_types.append(f"{absorbing_atom_type}" + "_h")
     pseudo_dict = dict(zip(atom_types, pseudofile_list))
 
     # create atomic species with atom type, atomic mass and pseudofiles 
     for index, atom in enumerate(atom_types):
-        atomic_mass = get_atomic_mass(atom)
+        atomic_mass = get_atomic_mass(atom.replace("_h", ""))
         atom_pseudofile = pseudo_dict[atom]
         atom_species += atom + f" {atomic_mass} " + atom_pseudofile + "\n"
-
-    atom_species += absorbing_atom_type + '_h' + f" {get_atomic_mass(absorbing_atom_type)} " + pseudo_dict[absorbing_atom_type] + "\n"
     
     control = " &control\n    calculation='scf',\n    pseudo_dir='" + pseudo_directory + "',\n    outdir='" + out_directory + "',\n    prefix='" + prefix + "',\n /\n"
-    system = " &system\n    ibrav=0,\n    nat=" + number_atoms + ",\n    ntyp=" + number_atom_types + ",\n    ecutwfc=" + f"{ecutwfc}" + ",\n /\n" 
-    electrons = " &electrons\n /\n"
+    system = " &system\n    ibrav=0,\n    nat=" + number_atoms + ",\n    tot_charge=" + f"{tot_charge}" + ",\n    ntyp=" + number_atom_types + ",\n    ecutwfc=" + f"{ecutwfc}" + ",\n /\n" 
+    electrons = " &electrons\n    scf_must_converge="+ scf_must_converge + ",\n" + "/\n"
     atomic_species = "ATOMIC_SPECIES\n" + atom_species 
     atomic_positions = "ATOMIC_POSITIONS " + position_type +"\n" + coordinates 
     k_points = "K_POINTS gamma\n"
@@ -167,7 +168,7 @@ def scf_input(vasp_file, prefix, pseudofile_list, absorbing_atom_type, absorbing
 
 
 def xspectra_input(cwf_file, prefix, out_directory = '$TMP_DIR/', absorbing_atom_index = 1, kpoints = '1 1 1 0 0 0', edge = 'K', 
-                   xnepoint = 100, xemax = 10, xemin = 0, cut_occ_states = '.false.'):
+                   xnepoint = 100, xemax = 10, xemin = 0, cut_occ_states = '.false.', xgamma=0.8):
     
     # description: create xspectra.x input file from calculated SCF data
 
@@ -182,12 +183,13 @@ def xspectra_input(cwf_file, prefix, out_directory = '$TMP_DIR/', absorbing_atom
     ## xemax: maximum energy (eV) for XAS spectra, numeric
     ## xemin: minimum energy (eV) for XAS spectra, numeric
     ## cut_occ_states: determines whether to visualize occupied states ('.false.') or to cut out occupied states ('.true.'), string
-    
+    ## xgamma: broadening parameter, numeric
+
     save_file = prefix + ".xspectra.sav"
     
     input_xspectra = " &input_xspectra\n    calculation='xanes_dipole',\n    edge='" + edge + "',\n    prefix='" + prefix + "',\n    outdir='" + out_directory + "',\n    x_save_file='" + save_file + "',\n    xiabs=" + f"{absorbing_atom_index},\n" + " /\n"
-    plot = " &plot\n    xnepoint=" + f"{xnepoint}" + ",\n    xemin=" + f"{xemin}" + ",\n    xemax=" + f"{xemax}" + ",\n    cut_occ_states=" + f"{cut_occ_states}" + ",\n /\n"
-    pseudos = " &pseudos\n    filecore='" + cwf_file + "',\n"
+    plot = " &plot\n    xnepoint=" + f"{xnepoint}" + ",\n    xemin=" + f"{xemin}" + ",\n    xemax=" + f"{xemax}" + ",\n    xgamma=" + f"{xgamma}" + ",\n    cut_occ_states=" + f"{cut_occ_states}" + ",\n /\n"
+    pseudos = " &pseudos\n    filecore='" + cwf_file + "',\n /\n"
     cut_occ = " &cut_occ\n /\n"
     
     xspectra_input = input_xspectra + plot + pseudos + cut_occ + kpoints
@@ -196,6 +198,26 @@ def xspectra_input(cwf_file, prefix, out_directory = '$TMP_DIR/', absorbing_atom
     
     with open(output_file, 'w') as file:
         file.write(xspectra_input)
+
+
+
+####################################################################################################
+############################## Generate molecularnexafs.x Input File ################################
+####################################################################################################
+
+# NOT DONE. INPUT FILE FOR XPS CALCULATION.
+
+def xps_input(prefix, nat = 0, erangexps=(-5,5), nptxps=501, etotfch=0):
+    
+    control = " &CONTROL\n    donexafs='.FALSE.',\n    doxps='.TRUE.',\n    prefix='" + prefix + "',\n    nat=" + nat + ",\n" + " /\n"
+    xps = " &XPS\n    erangexps=(" + f"{erangexps[0]}" + ":" + f"{erangexps[1]}" + "),\n    nptxps=" + f"{nptxps}" + ",\n    etotfch=" + f"{etotfch}" + ",\n /\n"
+    nexafs = " &NEXAFS\n /\n"
+    
+    xps_input = control + xps + nexafs
+    output_file = prefix + ".xps.in"
+    
+    with open(output_file, 'w') as file:
+        file.write(xps_input)    
 
 
 
@@ -239,7 +261,7 @@ def normalize_intensity(sigma):
     return(normalized_intensity)
 
 
-def plot_spectra(dat_file, prefix, E_core):
+def plot_spectra(dat_file, prefix, E_core=0):
     
     # description: plots spectra data given a single dat_file
 
@@ -264,15 +286,24 @@ def plot_spectra(dat_file, prefix, E_core):
             energy_values.append(energy)
             sigma_values.append(sigma)
 
-    energy_values = [x + E_core for x in energy_values]
+    fig, ax1 = plt.subplots()
 
-    plt.plot(energy_values, sigma_values, linestyle='-', color='k')
+    plt.xlim(-10, 30)
 
-    plt.xlabel("Energy (eV)", fontsize=12)
-    plt.ylabel("Sigma", fontsize=12)
+    ax1.plot(energy_values, sigma_values, linestyle='-', label='xgamma=0.8')
+
+    ax1.set_xlabel("Relative Energy (eV)")
+    ax1.set_ylabel("Normalized Intensity", fontsize=12)
+    ax1.set_yticks([])
+    ax1.legend(frameon=False)
+
+    ax2 = ax1.secondary_xaxis('top')
+    ax2.set_xlabel("Photon Energy (eV)")
+    ticks = [-10, -5, 0, 5, 10, 15, 20, 25, 30]
+    ax2.set_xticks(ticks) 
+    ax2.set_xticklabels([x + E_core for x in ticks]) 
+
     plt.title("XANES Spectrum for " + f"{prefix}", fontsize=14)
-    plt.legend()
-
     plt.show()
 
 
