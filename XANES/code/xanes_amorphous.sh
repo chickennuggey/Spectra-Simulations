@@ -2,16 +2,10 @@
 
 total_start=`date +%s` 
 
-echo -e "##### This script will run pw.x and xspectra.x calculations for central atoms #####"
+echo -e "\n##### This script will run pw.x and xspectra.x calculations for central atoms #####"
 echo -e "##### By default, this will consider all atoms within 3 angstroms #####"
 
-# output arguments (debugging)
-echo "\nArgument 1 (scf input): $1"
-echo "Argument 2 (pseudofile): $2"
-echo "Argument 3 (xspectra input): $3\n"
-
 # check inputs 
-echo -e "##### Checking inputted data #####"
 if [ -z "$1" ]; then
     echo "Error: Please enter a pw.x input file."
     exit 1
@@ -24,7 +18,6 @@ if [ -z "$3" ]; then
     echo "Error: Please enter a xspectra.x input file."
     exit 1
 fi
-echo -e "\nDone.\n"
 
 # save inputs
 SCF_INPUT="$1"
@@ -32,42 +25,47 @@ PSEUDO_INPUT="$2"
 XSPECTRA_INPUT="$3"
 NAME="${SCF_INPUT%.scf.in}"
 
+echo -e "\nSCF input is $SCF_INPUT"
+echo -e "Pseudofile input is $PSEUDO_INPUT"
+echo -e "XSpectra input is $XSPECTRA_INPUT"
+echo -e "Name of material is $NAME\n"
+
 # save cell information
 cutoff=3.0 # can change this (if desired)
 absorbing_atom=$(awk '/ATOMIC_SPECIES/{flag=1} /ATOMIC_POSITIONS/{flag=0} flag && $1 ~ /_h$/ {print substr($1, 1, length($1)-2); exit}' "results/$SCF_INPUT")
 A=$(awk '/^ *A *=/ {print $3}' "results/$SCF_INPUT") 
 num_atoms=$(awk '/^ *nat *=/ {print $3}' "results/$SCF_INPUT")
 
-echo -e "##### Performing Calculations #####"
-
 # output cell information
-echo "\nCell Information:"
-echo "______________________________________________________________________"
+echo "Cell Information:"
 echo "Cutoff distance: $cutoff"
 echo "Absorbing Atom Type: $absorbing_atom"
 echo "Cell Boundary: $A"
 echo "Number of Atoms: $num_atoms"
-echo "______________________________________________________________________\n"
+echo -e
+
+echo "______________________________________________________________________"
 
 # loop through every atom 
 for ((i=0; i<num_atoms; i++)); do
-    echo -e "\nTesting absorbing atom $((i+1))..." 
+    echo -e "\nTesting absorbing atom $((i+1))...\n" 
     atoms=($(awk '/ATOMIC_POSITIONS/{flag=1; next} /K_POINTS/{flag=0} flag {print $1}' "results/$SCF_INPUT"))
     positions=($(awk '/ATOMIC_POSITIONS/{flag=1; next} /K_POINTS/{flag=0} flag {print $2, $3, $4}' "results/$SCF_INPUT"))
 
     # check if atom is absorbing atom
     if [[ "${atoms[i]}" == *_h ]]; then 
-        echo -e "Checking if atom is within cutoff boundaries..."
-  
         # check if its positions are within boundaries
         x=$(echo ${positions[i*3]} | awk '{print $1}')
         y=$(echo ${positions[i*3+1]} | awk '{print $1}')
         z=$(echo ${positions[i*3+2]} | awk '{print $1}')
-       
+	
        echo "Atom Type: ${atoms[i]}"
        echo "X-coordinate: $x"
        echo "Y-coordinate: $y"
        echo "Z-coordinate: $z"
+
+       echo -e
+       echo -e "Checking if atom is within cutoff boundaries..."
 
         # check if atom is within boundary conditions
         if [[ $(echo "$x > $cutoff" | bc) -eq 1 && $(echo "$x < $A - $cutoff" | bc) -eq 1 ]] && \
@@ -75,20 +73,20 @@ for ((i=0; i<num_atoms; i++)); do
            [[ $(echo "$z > $cutoff" | bc) -eq 1 && $(echo "$z < $A - $cutoff" | bc) -eq 1 ]]; then
            
            echo -e "Atom is within cutoff boundaries."
-           echo -e "Performing SCF calculations on $SCF_INPUT..."
+           echo -e "\nPerforming SCF calculations on $SCF_INPUT...\n"
            ./scf "$SCF_INPUT" "$PSEUDO_INPUT"
-           echo -e "Done."
+           echo -e "Done.\n"
 
-           echo -e "Performing XSpectra calculations on $XSPECTRA_INPUT..."
+           echo -e "\nPerforming XSpectra calculations on $XSPECTRA_INPUT...\n"
            ./xanes "$XSPECTRA_INPUT"
            mv results/$NAME.xspectra.dat results/${NAME}$((i+1)).xspectra.dat
-           echo -e "Done." 
+           echo -e "Done.\n" 
         else 
-           echo -e "Atom is not within cutoff boundaries."
+           echo -e "Atom is not within cutoff boundaries.\n"
         fi
 
         # update the input file so the next appropriate atom is the absorbing atom
-	      next_atom_index=$((i+1))
+	next_atom_index=$((i+1))
         # check if next atom is within bounds and is the same atom type
         if [[ $next_atom_index -lt $num_atoms && "${atoms[next_atom_index]}" == "${atoms[i]%_h}" ]]; then
             echo -e "Moving on to the next absorbing atom..."
@@ -106,7 +104,7 @@ for ((i=0; i<num_atoms; i++)); do
             exit 0
         fi   
     fi
-    echo "\n________________________________________________________________________\n"
+    echo -e "\n________________________________________________________________________\n"
 done
 
 total_end=`date +%s`
