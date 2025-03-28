@@ -22,7 +22,7 @@ fi
 SCF_INPUT="$1"
 PSEUDO_INPUT="$2"
 XSPECTRA_INPUT="$3"
-NAME="${PSEUDO_INPUT%.xspectra.in}"
+NAME="${XSPECTRA_INPUT%.xspectra.in}"
 
 TEMP_FILE=$(mktemp)
 cp results/$SCF_INPUT $TEMP_FILE
