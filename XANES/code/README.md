@@ -22,6 +22,7 @@
 | `xanes_amorphous` | performs SCF & XANES calculations for central atoms within 3 Å | 1. pw.x input file(.scf.in)<br/>2. pseudofile<br/>3. xspectra.x input file (.xspectra.in) |
 
 **Additional Notes**
+* `xanes_amorphous` currently only works with lattice parameter, A
 * Always ensure there is output from `scf` before using `xanes` 
 * The first atom should be labeled as the absorbing atom in `xanes_amorphous` and `xanes_crystal` to ensure all atoms are looped through and checked
 
