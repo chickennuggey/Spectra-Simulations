@@ -15,7 +15,7 @@
 source ./utils
 
 # runtime vs number of atoms
-nat=(20 50 100 261)
+nat=(10 20 50 100 261)
 for n in "${nat[@]}"; do
     # save name
     prefix="aC1_$n"
