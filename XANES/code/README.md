@@ -39,6 +39,6 @@
 | `xps_input` (NOT DONE) | Generates molecularnexafs input file (.molecularnexafs.in) |
 | `extract_spectra_data` | Extracts energy and intensity from .dat file |
 | `normalize_intensity` | Normalizes intensity to allow comparison of spectras |
-| `plot_spectra` | Plots a single spectra |
+| `plot_spectra` | Plots a single spectra from a single .dat file |
 | `average_spectra` | Averages the intensity of multiple .dat files |
 
