@@ -15,8 +15,8 @@
 source ./utils
 
 # runtime vs number of atoms
-nat=(10 20 50 100 261)
-for n in "$nat[@]"; do
+nat=(20 50 100 261)
+for n in "${nat[@]}"; do
     # save name
     prefix="aC1_$n"
     # copy and modifiy aC1 scf file
@@ -25,6 +25,7 @@ for n in "$nat[@]"; do
     # copy and modify aC1 xspectra file
     update_input results/aC1.xspectra.in prefix "'$prefix'" results/$prefix.xspectra.in
     update_input results/$prefix.xspectra.in filecore "'$prefix.wfc'"
+    update_input results/$prefix.xspectra.in x_save_file "'$prefix.sav'"
     # run calculations
     ./scf $prefix.scf.in C_PBE_TM_2pj.UPF
     ./xanes $prefix.xspectra.in
