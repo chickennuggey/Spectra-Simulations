@@ -4,13 +4,7 @@ total_start=`date +%s`
 
 echo -e "##### This script will run pw.x and xspectra.x calculations for all atoms #####"
 
-# output arguments (debugging)
-echo "\nArgument 1: $1"
-echo "Argument 2: $2"
-echo "Argument 3: $3\n"
-
 # check all inputted data
-echo -e "##### Checking inputted data #####"
 if [ -z "$1" ]; then
     echo "Error: Please enter a pw.x input file."
     exit 1
@@ -23,13 +17,18 @@ if [ -z "$3" ]; then
     echo "Error: Please enter a xspectra.x input file."
     exit 1
 fi
-echo -e "\nDone.\n"
 
 # save arguments
 SCF_INPUT="$1"
 PSEUDO_INPUT="$2"
 XSPECTRA_INPUT="$3"
 NAME="${SCF_INPUT%.scf.in}"
+
+# output arguments (debugging)
+echo "\nSCF input is $SCF_INPUT"
+echo "Pseudofile input is $PSEUDO_INPUT"
+echo "XSpectra input is $XSPECTRA_INPUT"
+echo "Name of material is $NAME\n"
 
 absorbing_atom=$(awk '/ATOMIC_SPECIES/{flag=1} /ATOMIC_POSITIONS/{flag=0} flag && $1 ~ /_h$/ {print substr($1, 1, length($1)-2); exit}' "results/$SCF_INPUT")
 atoms=($(awk '/ATOMIC_POSITIONS/{flag=1; next} /K_POINTS/{flag=0} flag {print $1}' "results/$SCF_INPUT"))
