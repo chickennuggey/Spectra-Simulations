@@ -93,18 +93,18 @@ for ((i=0; i<num_atoms; i++)); do
         # check if next atom is within bounds and is the same atom type
         if [[ $next_atom_index -lt $num_atoms && "${atoms[next_atom_index]}" == "${atoms[i]%_h}" ]]; then
             echo -e "Moving on to the next absorbing atom..."
+	    echo -e "Modifying $SCF_INPUT..."
             awk -v idx="$i" -v next_idx="$next_atom_index" 'BEGIN {found = 0; count = 0}
             /ATOMIC_POSITIONS/ {print; found = 1; next} 
             /K_POINTS/ {found = 0}
             found && count == idx {if ($1 ~ /_h$/) print substr($1, 1, length($1)-2), $2, $3, $4; else print; count++; next}
-  	        found && count == next_idx {if ($1 !~ /_h$/) print $1 "_h", $2, $3, $4; else print; count++; next}
+  	    found && count == next_idx {if ($1 !~ /_h$/) print $1 "_h", $2, $3, $4; else print; count++; next}
             found {count++}
-            echo -e "Modifying $SCF_INPUT..."
             ' "results/$SCF_INPUT" > temp_file && mv temp_file "results/$SCF_INPUT"
             echo -e "Done."
         else
             echo -e "Finished testing all absorbing atoms"
-            exit 0
+	    break
         fi   
     fi
     echo -e "\n________________________________________________________________________\n"
