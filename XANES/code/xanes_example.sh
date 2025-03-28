@@ -31,7 +31,7 @@ for n in "${nat[@]}"; do
     ./xanes $prefix.xspectra.in
 done
 
-# diamond vs xgamma (GOOD)
+# diamond vs xgamma 
 ./scf diamond.scf.in C_PBE_TM_2pj.UPF
 xgamma=(0.4 0.8 1 1.5)
 for x in "${xgamma[@]}"; do
@@ -40,7 +40,7 @@ for x in "${xgamma[@]}"; do
     ./xanes $prefix.xspectra.in
 done  
 
-# average diamond (GOOD)
+# average diamond 
 xgamma=(0.8 1 1.5)
 for x in "${xgamma[@]}"; do
     prefix="avg_diamond_$x"
@@ -48,7 +48,7 @@ for x in "${xgamma[@]}"; do
     ./xanes_crystal diamond.scf.in C_PBE_TM_2pj.UPF $prefix.xspectra.in
 done 
 
-# carbon (aC) vs xgamma (GOOD)
+# carbon (aC) vs xgamma
 ./scf aC.scf.in C_PBE_TM_2pj.UPF
 xgamma=(0.4 0.8 1 1.5)
 for x in "${xgamma[@]}"; do
@@ -57,7 +57,7 @@ for x in "${xgamma[@]}"; do
     ./xanes $prefix.xspectra.in
 done 
 
-# average carbon (aC) (GOOD)
+# average carbon (aC)
 xgamma=(0.8 1 1.5)
 for x in "${xgamma[@]}"; do
     prefix="avg_aC_$x"
@@ -65,21 +65,23 @@ for x in "${xgamma[@]}"; do
     ./xanes_amorphous aC.scf.in C_PBE_TM_2pj.UPF $prefix.xspectra.in
 done 
 
-# carbon (aC1)
+# carbon (aC1) for xgamma=1
 ./scf aC1.scf.in C_PBE_TM_2pj.UPF
 update_input results/aC1.xspectra.in xgamma "1" results/aC1_1.xspectra.in
 ./xanes aC1_1.xspectra.in
+
+# average carbon (aC) for xgamma=1
+update_input results/aC1.xspectra.in xgamma "1" results/avg_aC1_1.xspectra.in
+./xanes_amorphous aC1.scf.in C_PBE_TM_2pj.UPF avg_aC1_1.xspectra.in
 
 # carbon (aC2)
 ./scf aC2.scf.in C_PBE_TM_2pj.UPF
 update_input results/aC2.xspectra.in xgamma "1" results/aC2_1.xspectra.in
 ./xanes aC2_1.xspectra.in
-
 # carbon (aC3)
 ./scf aC3.scf.in C_PBE_TM_2pj.UPF
 update_input results/aC3.xspectra.in xgamma "1" results/aC3_1.xspectra.in
 ./xanes aC3_1.xspectra.in
-
 # carbon (aC4)
 ./scf aC4.scf.in C_PBE_TM_2pj.UPF
 update_input results/aC4.xspectra.in xgamma "1" results/aC4_1.xspectra.in
