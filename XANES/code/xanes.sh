@@ -15,7 +15,7 @@ SAMPLE_DIR=`pwd`
 X_INPUT="$1"
 NAME="${X_INPUT%.xspectra.in}"
 
-echo -e "###### This script will run xspectra.x for $X_INPUT ##########"
+echo -e "\n###### This script will run xspectra.x for $X_INPUT ##########"
 
 echo -e "\nXSpectra input is $X_INPUT"
 echo -e "Name of material is $NAME\n"
