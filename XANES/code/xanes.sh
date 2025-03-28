@@ -15,7 +15,7 @@ SAMPLE_DIR=`pwd`
 X_INPUT="$1"
 NAME="${X_INPUT%.xspectra.in}"
 
-echo -e "###### This script will run xspectra.x for $X_INPUT given that SCF has been calculated ##########"
+echo -e "###### This script will run xspectra.x for $X_INPUT ##########"
 
 echo -e "\nXSpectra input is $X_INPUT"
 echo -e "Name of material is $NAME\n"
@@ -63,7 +63,6 @@ echo -e "Done.\n"
 
 end_time=`date +%s`
 runtime=$((end_time - start_time))
-
 hours=$((runtime / 3600))
 minutes=$(( (runtime % 3600) / 60 ))
 seconds=$(( (runtime % 3600) % 60 ))
