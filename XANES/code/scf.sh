@@ -20,7 +20,7 @@ SCF_INPUT="$1"
 PSEUDO_INPUT="$2"
 NAME="${SCF_INPUT%.scf.in}"
 
-echo -e "############ This script will run pw.x for $SCF_INPUT ############"
+echo -e "\n############ This script will run pw.x for $SCF_INPUT ############"
 
 echo -e "\nSCF input is $SCF_INPUT"
 echo -e "Pseudofile input is $PSEUDO_INPUT"
