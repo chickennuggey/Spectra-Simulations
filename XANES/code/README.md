@@ -15,7 +15,7 @@
 
 | Bash Scripts | Function | Arguments  | 
 | --- | --- | --- |
-| `utils` | `update_input`: updates parameter values in any input file | `update_input`<br/>1. input file<br/>2. parameter<br/>3.new value<br/>4. new file (optional)|
+| `utils` | `update_input`: modifies parameter values in existing input file or new file | `update_input`<br/>1. input file<br/>2. parameter<br/>3.new value<br/>4. new file (optional)|
 | `scf` | performs SCF calculations | 1. pw.x input file (.scf.in)<br/>2. pseudofile |
 | `xanes` | performs XANES calculations | 1. xspectra.x input file (.xspectra.in)|
 | `xanes_crystal` | performs SCF & XANES calculations for all atoms | 1. pw.x input file(.scf.in)<br/>2. pseudofile<br/>3. xspectra.x input file (.xspectra.in)|
