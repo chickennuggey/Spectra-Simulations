@@ -24,6 +24,9 @@ PSEUDO_INPUT="$2"
 XSPECTRA_INPUT="$3"
 NAME="${SCF_INPUT%.scf.in}"
 
+TEMP_FILE=$(mktemp)
+cp results/$SCF_INPUT $TEMP_FILE
+
 # output arguments (debugging)
 echo -e "\nSCF input is $SCF_INPUT"
 echo -e "Pseudofile input is $PSEUDO_INPUT"
@@ -102,6 +105,8 @@ for ((i=0; i<num_atoms-1; i++)); do
     fi
     echo "______________________________________________________________________"
 done
+
+mv $TEMP_FILE results/$SCF_INPUT
 
 total_end=`date +%s`
 total_runtime=$((total_end - total_start))
