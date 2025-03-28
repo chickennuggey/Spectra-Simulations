@@ -1,0 +1,26 @@
+ &input_xspectra
+    calculation = 'xanes_dipole'
+    prefix = 'aC'
+    outdir = '/u/home/n/nbriana/qe-7.3.1/XSpectra/test/results/tmp/'
+    xiabs = 1
+    x_save_file = 'aC.xspectra.sav'
+    xniter=1000
+ /
+
+ &plot
+    xemin = -10
+    xemax = 30
+    xgamma = 0.8
+    xnepoint = 1000
+ /
+
+ &pseudos
+    filecore = 'aC.wfc'
+ /
+
+ &cut_occ
+    cut_desmooth=0.1,
+    cut_stepl=0.01,
+ /
+
+1 1 1 0 0 0

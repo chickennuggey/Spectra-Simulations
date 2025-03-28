@@ -1,0 +1,415 @@
+
+     Program XSpectra v.7.3.1 starts on 27Mar2025 at 21:55:49 
+
+     This program is part of the open-source Quantum ESPRESSO suite
+     for quantum simulation of materials; please cite
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 21 395502 (2009);
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 29 465901 (2017);
+         "P. Giannozzi et al., J. Chem. Phys. 152 154105 (2020);
+          URL http://www.quantum-espresso.org", 
+     in publications or presentations arising from this work. More details at
+     http://www.quantum-espresso.org/quote
+
+     Parallel version (MPI), running on     1 processors
+
+     MPI processes distributed on     1 nodes
+     8423 MiB available memory on the printing compute node when the environment starts
+ 
+
+     -------------------------------------------------------------------------
+                    __  ____                 _
+                    \ \/ / _\_ __   ___  ___| |_ _ __ __ _
+                     \  /\ \| '_ \ / _ \/ __| __| \__/ _\ |
+                     /  \_\ \ |_) |  __/ (__| |_| | | (_| |
+                    /_/\_\__/ .__/ \___|\___|\__|_|  \__,_|
+                            |_|
+
+     In publications arising from the use of XSpectra, please cite:
+      - O. Bunau and M. Calandra,
+        Phys. Rev. B 87, 205105 (2013)
+      - Ch. Gougoussis, M. Calandra, A. P. Seitsonen, F. Mauri,
+        Phys. Rev. B 80, 075102 (2009)
+      - M. Taillefumier, D. Cabaret, A. M. Flank, and F. Mauri,
+        Phys. Rev. B 66, 195107 (2002)
+
+     -------------------------------------------------------------------------
+                                Reading input_file
+     -------------------------------------------------------------------------
+
+     calculation: xanes_dipole
+
+     xepsilon  [crystallographic coordinates]:   1.000000   0.000000   0.000000
+
+     xonly_plot: FALSE
+        => complete calculation: Lanczos + spectrum plot
+
+     filecore (core-wavefunction file): aC.wfc              
+ 
+     main plot parameters:
+        cut_occ_states: FALSE
+        gamma_mode:  constant
+        -> using xgamma [eV]:  0.40
+        xemin [eV]: -10.00
+        xemax [eV]:  30.00
+        xnepoint: 1000
+        energy zero automatically set to the Fermi level
+
+     Fermi level determined from SCF save directory (aC.save)
+     NB: For an insulator (SCF calculated with occupations="fixed")
+         the Fermi level will be placed at the position of HOMO.
+ 
+     WARNING: variable ef_r is obsolete
+
+     -------------------------------------------------------------------------
+                      Reading SCF save directory: aC.save
+     -------------------------------------------------------------------------
+
+
+     Reading xml data from directory:
+
+     /u/home/n/nbriana/qe-7.3.1/XSpectra/test/results/tmp/aC.save/
+
+     IMPORTANT: XC functional enforced from input :
+     Exchange-correlation= PBE
+                           (   1   4   3   4   0   0   0)
+     Any further DFT definition will be discarded
+     Please, verify this is what you really want
+
+ 
+     G-vector sticks info
+     --------------------
+     sticks:   dense  smooth     PW     G-vecs:    dense   smooth      PW
+     Sum       10229   10229   2561               778439   778439   97521
+ 
+     Using Slab Decomposition
+ 
+     Reading collected, re-writing distributed wavefunctions
+
+     -------------------------------------------------------------------------
+                           Getting the Fermi energy 
+     -------------------------------------------------------------------------
+
+     From SCF save directory:
+        ehomo [eV]:   -7.6864 (highest occupied level)
+        No LUMO value in SCF calculation
+        ef    [eV]:   -7.6864
+
+     -> ef (in eV) will be written in x_save_file
+
+     -------------------------------------------------------------------------
+                           Energy zero of the spectrum 
+     -------------------------------------------------------------------------
+
+     -> ef will be used as energy zero of the spectrum
+ 
+     G-vector sticks info
+     --------------------
+     sticks:   dense  smooth     PW     G-vecs:    dense   smooth      PW
+     Sum       10229   10229   2561               778439   778439   97521
+ 
+     Using Slab Decomposition
+ 
+
+
+     bravais-lattice index     =            1
+     lattice parameter (alat)  =      28.3459  a.u.
+     unit-cell volume          =   22775.6289 (a.u.)^3
+     number of atoms/cell      =           20
+     number of atomic types    =            2
+     number of electrons       =        80.00
+     number of Kohn-Sham states=           40
+     kinetic-energy cutoff     =      40.0000  Ry
+     charge density cutoff     =     160.0000  Ry
+     Exchange-correlation= PBE
+                           (   1   4   3   4   0   0   0)
+
+     celldm(1)=  28.345892  celldm(2)=   0.000000  celldm(3)=   0.000000
+     celldm(4)=   0.000000  celldm(5)=   0.000000  celldm(6)=   0.000000
+
+     crystal axes: (cart. coord. in units of alat)
+               a(1) = (   1.000000   0.000000   0.000000 )  
+               a(2) = (   0.000000   1.000000   0.000000 )  
+               a(3) = (   0.000000   0.000000   1.000000 )  
+
+     reciprocal axes: (cart. coord. in units 2 pi/alat)
+               b(1) = (  1.000000  0.000000  0.000000 )  
+               b(2) = (  0.000000  1.000000  0.000000 )  
+               b(3) = (  0.000000  0.000000  1.000000 )  
+
+
+     PseudoPot. # 1 for C  read from file:
+     /u/home/n/nbriana/qe-7.3.1/XSpectra/test/pseudo/Ch_PBE_TM_2pj.UPF
+     MD5 check sum: ef0cb3dee31bd9e4ba2a832a2c716264
+     Pseudo is Norm-conserving, Zval =  5.0
+     Generated by new atomic code, or converted to UPF format
+     Using radial grid of 1073 points,  1 beta functions with: 
+                l(1) =   0
+
+     PseudoPot. # 2 for C  read from file:
+     /u/home/n/nbriana/qe-7.3.1/XSpectra/test/pseudo/C_PBE_TM_2pj.UPF
+     MD5 check sum: e8858615eb0a4b79f05373b4879fdf67
+     Pseudo is Norm-conserving, Zval =  4.0
+     Generated by new atomic code, or converted to UPF format
+     Using radial grid of 1073 points,  1 beta functions with: 
+                l(1) =   0
+
+     atomic species   valence    mass     pseudopotential
+     C_h               5.00    12.01100     C ( 1.00)
+     C                 4.00    12.01100     C ( 1.00)
+
+     No symmetry found
+
+
+
+   Cartesian axes
+
+     site n.     atom                  positions (alat units)
+         1        C_h    tau(   1) = (   0.0156909   0.0701746   0.0479686  )
+         2        C      tau(   2) = (   0.0242461   0.1503129   0.0798924  )
+         3        C      tau(   3) = (   0.0459560   0.2197156   0.1212671  )
+         4        C      tau(   4) = (   0.0379378  -0.0117593   0.0543789  )
+         5        C      tau(   5) = (   0.0518574   0.1619205   0.3776840  )
+         6        C      tau(   6) = (   0.1320754   0.3144944   0.2303134  )
+         7        C      tau(   7) = (   0.1202822   0.2528212   0.1606116  )
+         8        C      tau(   8) = (   0.1292617   0.1257274   0.3760598  )
+         9        C      tau(   9) = (   0.2139510   0.0752980   0.1641980  )
+        10        C      tau(  10) = (   0.2106548   0.2194783   0.1322070  )
+        11        C      tau(  11) = (   0.2301142   0.1315358   0.0903849  )
+        12        C      tau(  12) = (   0.2198798   0.3324249   0.2437391  )
+        13        C      tau(  13) = (   0.2125692   0.0648491   0.2452808  )
+        14        C      tau(  14) = (   0.2041761   0.1095050   0.3264509  )
+        15        C      tau(  15) = (   0.2770182   0.1089055   0.0179022  )
+        16        C      tau(  16) = (   0.2696718   0.3275966   0.1470264  )
+        17        C      tau(  17) = (   0.2836810   0.2480794   0.1891343  )
+        18        C      tau(  18) = (   0.2611248   0.2575947   0.2859946  )
+        19        C      tau(  19) = (   0.2491721   0.1879666   0.3381037  )
+        20        C      tau(  20) = (   0.3530823   0.0873927  -0.0127489  )
+
+     number of k points=     1
+                       cart. coord. in units 2pi/alat
+        k(    1) = (   0.0000000   0.0000000   0.0000000), wk =   2.0000000
+
+     Dense  grid:   389220 G-vectors     FFT dimensions: ( 120, 120, 120)
+
+     Estimated max dynamical RAM per process >     460.96 MB
+
+     The potential is recalculated from file :
+     /u/home/n/nbriana/qe-7.3.1/XSpectra/test/results/tmp/aC.save/charge-density
+
+     Starting wfcs are  160 atomic wfcs
+
+     -------------------------------------------------------------------------
+               Reading core wavefunction file for the absorbing atom
+     -------------------------------------------------------------------------
+
+     aC.wfc successfully read
+
+     -------------------------------------------------------------------------
+                              Attributing the PAW radii 
+                     for the absorbing atom [units: Bohr radius]
+     -------------------------------------------------------------------------
+
+        PAW proj 1: r_paw(l= 0)= 2.25  (1.5*r_cut)
+        PAW proj 2: r_paw(l= 0)= 2.25  (1.5*r_cut)
+        PAW proj 3: r_paw(l= 1)= 2.25  (1.5*r_cut)
+        PAW proj 4: r_paw(l= 1)= 2.25  (1.5*r_cut)
+ 
+        NB: The calculation will not necessary use all these r_paw values.
+            - For a edge in the electric-dipole approximation,
+              only the r_paw(l=1) values are used.
+            - For a K edge in the electric-quadrupole approximation,
+              only the r_paw(l=2) values are used.
+
+            - For a L2 or L3 edge in the electric-quadrupole approximation,
+
+              all projectors (s, p and d) are used.
+
+
+     -------------------------------------------------------------------------
+                          Starting XANES calculation
+                     in the electric dipole approximation
+     -------------------------------------------------------------------------
+
+     Method of calculation based on the Lanczos recursion algorithm
+     --------------------------------------------------------------
+        - STEP 1: Construction of a kpoint-dependent Lanczos basis,
+          in which the Hamiltonian is tridiagonal (each 'iter' 
+          corresponds to the calculation of one more Lanczos vector)
+        - STEP 2: Calculation of the cross-section as a continued fraction
+          averaged over the k-points.
+
+     ... Begin STEP 1 ...
+
+        Radial transition matrix element(s) used in the calculation of the
+        initial vector of the Lanczos basis (|tilde{phi}_abs> normalized)
+        | For PAW proj. (l=1) #1: radial matrix element =   0.210989855
+        | For PAW proj. (l=1) #2: radial matrix element =   0.323003251
+ 
+        |-------------------------------------------------------------
+        ! k-point #     1:  ( 0.0000,  0.0000,  0.0000),  2.0000,   1
+        |-------------------------------------------------------------
+ okvan= F
+        |   Norm of the initial Lanczos vector: 0.12771096E+00
+        |   Estimated error at iter      5:   1.00179925
+        |   Estimated error at iter     10:   2.37892552
+        |   Estimated error at iter     15:   1.46283743
+        |   Estimated error at iter     20:   2.02353142
+        |   Estimated error at iter     25:   1.39111063
+        |   Estimated error at iter     30:   1.72811551
+        |   Estimated error at iter     35:   1.45730802
+        |   Estimated error at iter     40:   1.03551648
+        |   Estimated error at iter     45:   1.38555471
+        |   Estimated error at iter     50:   0.81249920
+        |   Estimated error at iter     55:   1.20688863
+        |   Estimated error at iter     60:   1.04639008
+        |   Estimated error at iter     65:   1.06263134
+        |   Estimated error at iter     70:   1.11005203
+        |   Estimated error at iter     75:   0.78528372
+        |   Estimated error at iter     80:   1.04609498
+        |   Estimated error at iter     85:   0.69350509
+        |   Estimated error at iter     90:   0.74432130
+        |   Estimated error at iter     95:   0.70910822
+        |   Estimated error at iter    100:   0.83119676
+        |   Estimated error at iter    105:   0.75139656
+        |   Estimated error at iter    110:   0.58014669
+        |   Estimated error at iter    115:   0.74025534
+        |   Estimated error at iter    120:   0.43980369
+        |   Estimated error at iter    125:   0.71284278
+        |   Estimated error at iter    130:   0.47347561
+        |   Estimated error at iter    135:   0.41189177
+        |   Estimated error at iter    140:   0.43992902
+        |   Estimated error at iter    145:   0.51503961
+        |   Estimated error at iter    150:   0.53162996
+        |   Estimated error at iter    155:   0.43936438
+        |   Estimated error at iter    160:   0.39356886
+        |   Estimated error at iter    165:   0.34189879
+        |   Estimated error at iter    170:   0.30627332
+        |   Estimated error at iter    175:   0.47381990
+        |   Estimated error at iter    180:   0.32787657
+        |   Estimated error at iter    185:   0.28752917
+        |   Estimated error at iter    190:   0.40310565
+        |   Estimated error at iter    195:   0.30836746
+        |   Estimated error at iter    200:   0.24737780
+        |   Estimated error at iter    205:   0.30845524
+        |   Estimated error at iter    210:   0.19951080
+        |   Estimated error at iter    215:   0.26428673
+        |   Estimated error at iter    220:   0.38429489
+        |   Estimated error at iter    225:   0.16934113
+        |   Estimated error at iter    230:   0.30673770
+        |   Estimated error at iter    235:   0.15168155
+        |   Estimated error at iter    240:   0.15500560
+        |   Estimated error at iter    245:   0.22281965
+        |   Estimated error at iter    250:   0.18819145
+        |   Estimated error at iter    255:   0.21765842
+        |   Estimated error at iter    260:   0.16746608
+        |   Estimated error at iter    265:   0.21112899
+        |   Estimated error at iter    270:   0.13809512
+        |   Estimated error at iter    275:   0.14366637
+        |   Estimated error at iter    280:   0.13738079
+        |   Estimated error at iter    285:   0.25838148
+        |   Estimated error at iter    290:   0.12828399
+        |   Estimated error at iter    295:   0.14066634
+        |   Estimated error at iter    300:   0.15085634
+        |   Estimated error at iter    305:   0.12144828
+        |   Estimated error at iter    310:   0.09526846
+        |   Estimated error at iter    315:   0.16052349
+        |   Estimated error at iter    320:   0.14471064
+        |   Estimated error at iter    325:   0.15096360
+        |   Estimated error at iter    330:   0.09318502
+        |   Estimated error at iter    335:   0.12977812
+        |   Estimated error at iter    340:   0.07042978
+        |   Estimated error at iter    345:   0.08641498
+        |   Estimated error at iter    350:   0.10411877
+        |   Estimated error at iter    355:   0.14396182
+        |   Estimated error at iter    360:   0.06613259
+        |   Estimated error at iter    365:   0.11432041
+        |   Estimated error at iter    370:   0.07366311
+        |   Estimated error at iter    375:   0.06741099
+        |   Estimated error at iter    380:   0.07141342
+        |   Estimated error at iter    385:   0.07368136
+        |   Estimated error at iter    390:   0.06604451
+        |   Estimated error at iter    395:   0.10287323
+        |   Estimated error at iter    400:   0.06069212
+        |   Estimated error at iter    405:   0.06182431
+        |   Estimated error at iter    410:   0.08145906
+        |   Estimated error at iter    415:   0.05032267
+        |   Estimated error at iter    420:   0.04617276
+        |   Estimated error at iter    425:   0.04655763
+        |   Estimated error at iter    430:   0.07286908
+        |   Estimated error at iter    435:   0.05125433
+        |   Estimated error at iter    440:   0.07808213
+        |   Estimated error at iter    445:   0.05896294
+        |   Estimated error at iter    450:   0.03292696
+        |   Estimated error at iter    455:   0.03834415
+        |   Estimated error at iter    460:   0.05412958
+        |   Estimated error at iter    465:   0.06371381
+        |   Estimated error at iter    470:   0.02908296
+        |   Estimated error at iter    475:   0.04291581
+        |   Estimated error at iter    480:   0.03609673
+        |   Estimated error at iter    485:   0.04398760
+        |   Estimated error at iter    490:   0.02369225
+        |   Estimated error at iter    495:   0.04004818
+        |   Estimated error at iter    500:   0.02910116
+        |   Estimated error at iter    505:   0.05073479
+        |   Estimated error at iter    510:   0.04333205
+        |   Estimated error at iter    515:   0.02838690
+        |   Estimated error at iter    520:   0.03848303
+        |   Estimated error at iter    525:   0.01892316
+        |   Estimated error at iter    530:   0.02089475
+        |   Estimated error at iter    535:   0.03465932
+        |   Estimated error at iter    540:   0.02376089
+        |   Estimated error at iter    545:   0.02558704
+        |   Estimated error at iter    550:   0.03337814
+        |   Estimated error at iter    555:   0.02302827
+        |   Estimated error at iter    560:   0.02745395
+        |   Estimated error at iter    565:   0.01463776
+        |   Estimated error at iter    570:   0.01993648
+        |   Estimated error at iter    575:   0.02151892
+        |   Estimated error at iter    580:   0.02089276
+        |   Estimated error at iter    585:   0.01960502
+        |   Estimated error at iter    590:   0.01821738
+        |   Estimated error at iter    595:   0.01709570
+        |   Estimated error at iter    600:   0.01967861
+        |   Estimated error at iter    605:   0.01600371
+        |   Estimated error at iter    610:   0.01169532
+        |   Estimated error at iter    615:   0.02754709
+        |   Estimated error at iter    620:   0.02544350
+        |   Estimated error at iter    625:   0.01248765
+        |   Estimated error at iter    630:   0.01473089
+        |   Estimated error at iter    635:   0.01200741
+        |   Estimated error at iter    640:   0.01220416
+        |   Estimated error at iter    645:   0.02022935
+        |   Estimated error at iter    650:   0.01558316
+        |   Estimated error at iter    655:   0.01034167
+        |   Estimated error at iter    660:   0.01503035
+        !   => CONVERGED at iter    665 with error=  0.00934052
+
+     Results of STEP 1 successfully written in x_save_file
+     x_save_file name: 
+     ->  aC.xspectra.sav                                                  
+     x_save_file version:  2
+
+     ... End STEP 1 ...
+
+     ... Begin STEP 2 ...
+
+     The spectrum is calculated using the following parameters:
+        energy-zero of the spectrum [eV]:   -7.6864
+        the occupied states are NOT eliminated from the spectrum
+        xemin [eV]: -10.00
+        xemax [eV]:  30.00
+        xnepoint: 1000
+        constant broadening parameter [eV]:    0.400
+        Core level energy [eV]:  -284.2    
+         (from electron binding energy of neutral atoms in X-ray data booklet)
+
+     Cross-section successfully written in xanes.dat                                                                                                                                                                                                                                                       
+
+     ... End STEP 2 ...
+
+     xanes        :     42.27s CPU     43.19s WALL (       1 calls)
+
+     -------------------------------------------------------------------------
+                                END JOB XSpectra
+     -------------------------------------------------------------------------
+
