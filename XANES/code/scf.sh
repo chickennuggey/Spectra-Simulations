@@ -2,7 +2,6 @@
 
 start_time=`date +%s` 
 
-echo -e "############ Checking Input Files ###################"
 # Check if there are required inputs
 if [ -z "$1" ]; then
     echo "Error: Please enter a pw.x input file."
@@ -12,7 +11,6 @@ if [ -z "$2" ]; then
     echo "Error: Please enter a pseudofile."
     exit 1
 fi
-echo -e "\nDone\n"
 
 cd `dirname $0`
 SAMPLE_DIR=`pwd`
@@ -22,13 +20,11 @@ SCF_INPUT="$1"
 PSEUDO_INPUT="$2"
 NAME="${SCF_INPUT%.scf.in}"
 
-echo -e "############ This script will run pw.x for $SCF_INPUT ###################"
+echo -e "############ This script will run pw.x for $SCF_INPUT ############"
 
-echo -e
 echo -e "\nSCF input is $SCF_INPUT"
-echo -e "PSEUDO input is $PSEUDO_INPUT"
+echo -e "Pseudofile input is $PSEUDO_INPUT"
 echo -e "Name of material is $NAME\n"
-echo -e
 
 echo -e "########## Loading in necessary variables and checking data ###############"
 
@@ -100,7 +96,6 @@ echo -e "Done.\n"
 
 end_time=`date +%s`
 runtime=$((end_time - start_time))
-
 hours=$((runtime / 3600))
 minutes=$(( (runtime % 3600) / 60 ))
 seconds=$(( (runtime % 3600) % 60 ))
