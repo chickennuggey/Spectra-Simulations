@@ -2,7 +2,7 @@
 
 total_start=`date +%s` 
 
-echo -e "##### This script will run pw.x and xspectra.x calculations for all atoms #####"
+echo -e "\n##### This script will run pw.x and xspectra.x calculations for all atoms #####"
 
 # check all inputted data
 if [ -z "$1" ]; then
@@ -25,29 +25,28 @@ XSPECTRA_INPUT="$3"
 NAME="${SCF_INPUT%.scf.in}"
 
 # output arguments (debugging)
-echo "\nSCF input is $SCF_INPUT"
-echo "Pseudofile input is $PSEUDO_INPUT"
-echo "XSpectra input is $XSPECTRA_INPUT"
-echo "Name of material is $NAME\n"
+echo -e "\nSCF input is $SCF_INPUT"
+echo -e "Pseudofile input is $PSEUDO_INPUT"
+echo -e "XSpectra input is $XSPECTRA_INPUT"
+echo -e "Name of material is $NAME\n"
 
 absorbing_atom=$(awk '/ATOMIC_SPECIES/{flag=1} /ATOMIC_POSITIONS/{flag=0} flag && $1 ~ /_h$/ {print substr($1, 1, length($1)-2); exit}' "results/$SCF_INPUT")
 atoms=($(awk '/ATOMIC_POSITIONS/{flag=1; next} /K_POINTS/{flag=0} flag {print $1}' "results/$SCF_INPUT"))
 num_atoms=${#atoms[@]}
 
 # output important cell information
-echo "\nCell Information:"
+echo -e "Cell Information"
+echo -e "Absorbing Atom Type: $absorbing_atom"
+echo -e "Number of Atoms: $num_atoms"
+echo -e
+
 echo "______________________________________________________________________"
-echo "Absorbing Atom Type: $absorbing_atom"
-echo "Number of Atoms: $num_atoms"
-echo "______________________________________________________________________\n"
 
-echo -e "##### Running calculations for the first absorbing atom #####"
+echo -e "\nTesting absorbing atom 1...\n"
 
-echo -e "\nTesting absorbing atom 1..."
-
-echo -e "Performing SCF calculations on $SCF_INPUT..."
+echo -e "Performing SCF calculations on $SCF_INPUT...\n"
 ./scf "$SCF_INPUT" "$PSEUDO_INPUT"
-echo -e "Done."
+echo -e "Done.\n"
 
 echo -e "Performing XSpectra calculations on $XSPECTRA_INPUT..."
 ./xanes "$XSPECTRA_INPUT"
@@ -56,14 +55,12 @@ echo -e "Done.\n"
 
 echo "______________________________________________________________________"
 
-echo -e "\n##### Running calculations for all other absorbing atoms #####"
-
 # loop through the rest of the atoms 
 for ((i=0; i<num_atoms-1; i++)); do
     atoms=($(awk '/ATOMIC_POSITIONS/{flag=1; next} /K_POINTS/{flag=0} flag {print $1}' "results/$SCF_INPUT"))
     positions=($(awk '/ATOMIC_POSITIONS/{flag=1; next} /K_POINTS/{flag=0} flag {print $2, $3, $4}' "results/$SCF_INPUT"))
 
-    echo -e "\nTesting absorbing atom $((i+2))..."
+    echo -e "\nTesting absorbing atom $((i+2))...\n"
 
     # check if atom is absorbing atom 
     if [[ "${atoms[i]}" == *_h ]]; then
@@ -80,7 +77,7 @@ for ((i=0; i<num_atoms-1; i++)); do
         next_atom_index=$((i+1))
         # check if next atom is within bounds and is the same atom type
         if [[ $next_atom_index -lt $num_atoms && "${atoms[next_atom_index]}" == "${atoms[i]%_h}" ]]; then
-            echo -e "Modifying $SCF_INPUT..."
+            echo -e "\nModifying $SCF_INPUT..."
             awk -v idx="$i" -v next_idx="$next_atom_index" 'BEGIN {found = 0; count = 0}
             /ATOMIC_POSITIONS/ {print; found = 1; next} 
             /K_POINTS/ {found = 0}
@@ -89,7 +86,7 @@ for ((i=0; i<num_atoms-1; i++)); do
             found {count++}
             {print}
             ' "results/$SCF_INPUT" > temp_file && mv temp_file "results/$SCF_INPUT"
-            echo -e "Done."
+            echo -e "Done.\n"
         else
             echo -e "Finished testing all absorbing atoms" 
             exit 0
@@ -98,7 +95,7 @@ for ((i=0; i<num_atoms-1; i++)); do
         ./scf "$SCF_INPUT" "$PSEUDO_INPUT"
         echo -e "Done."
 
-        echo -e "Performing XSpectra calculations on $XSPECTRA_INPUT..."
+        echo -e "\nPerforming XSpectra calculations on $XSPECTRA_INPUT..."
         ./xanes "$XSPECTRA_INPUT"
         mv results/$NAME.xspectra.dat results/${NAME}$((i+2)).xspectra.dat
         echo -e "Done.\n" 
