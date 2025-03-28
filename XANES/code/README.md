@@ -19,7 +19,7 @@
 | `scf` | performs SCF calculations | 1. pw.x input file (.scf.in)<br/>2. pseudofile |
 | `xanes` | performs XANES calculations | 1. xspectra.x input file (.xspectra.in)|
 | `xanes_crystal` | performs SCF & XANES calculations for all atoms | 1. pw.x input file(.scf.in)<br/>2. pseudofile<br/>3. xspectra.x input file (.xspectra.in)|
-| `xanes_amorphous` | performs SCF & XANES calculations for central atoms within 3 Å | 1. pw.x input file(.scf.in)<br/>2. pseudofile<br/>3. xspectra.x input file (.xspectra.in) |
+| `xanes_amorphous` (NOT DONE) | performs SCF & XANES calculations for central atoms within 3 Å | 1. pw.x input file(.scf.in)<br/>2. pseudofile<br/>3. xspectra.x input file (.xspectra.in) |
 
 **Additional Notes**
 * `xanes_amorphous` currently only works with lattice parameter, A
