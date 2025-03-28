@@ -13,7 +13,7 @@
 8. Main outputs will be located in results directory
 9. Additional outputs needed for xanes calculation will be located in tmp 
 
-| Bash Scripts | Function | Arguments  | 
+| Bash Scripts | Description | Arguments  | 
 | --- | --- | --- |
 | `utils` | `update_input`: modifies parameter values in existing input file or new file | `update_input`<br/>1. input file<br/>2. parameter<br/>3.new value<br/>4. new file (optional)|
 | `scf` | performs SCF calculations | 1. pw.x input file (.scf.in)<br/>2. pseudofile |
@@ -29,5 +29,15 @@
 
 ### vasp_to_input.py
 
-**Function**: Contains list of functions needed to prepare input files for scf (pw.x) and XANES calculations (xspectra.x) along with additional functions to plot spectra data from .dat files. 
+| Function | Description |
+| --- | --- | 
+| `get_atomic_mas` | Returns atomic mass of given element symbol |
+| `get_atom_type` | Returns atom type for a specific index in a VASP file |
+| `scf_input` | Converts VASP file into a pw.x input file (.scf.in) |
+| `xspectra_input` | Generates xspectra.x input file(.xspectra.in) |
+| `xps_input` (NOT DONE) | Generates molecularnexafs input file (.molecularnexafs.in) |
+| `extract_spectra_data` | Extracts energy and intensity from .dat file |
+| `normalize_intensity` | Normalizes intensity to allow comparison of spectras |
+| `plot_spectra` | Plots a single spectra |
+| `average_spectra` | Averages the intensity of multiple .dat files |
 
