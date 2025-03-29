@@ -205,11 +205,20 @@ def xspectra_input(cwf_file, prefix, out_directory = '$TMP_DIR/', absorbing_atom
 ############################## Generate molecularnexafs.x Input File ################################
 ####################################################################################################
 
-# NOT DONE. INPUT FILE FOR XPS CALCULATION.
+
 
 def xps_input(prefix, nat = 0, erangexps=(-5,5), nptxps=501, etotfch=0):
-    
-    control = " &CONTROL\n    donexafs='.FALSE.',\n    doxps='.TRUE.',\n    prefix='" + prefix + "',\n    nat=" + nat + ",\n" + " /\n"
+    # NOT DONE. 
+    # description: creates input file for xps calculation using molecularnexafs.x
+
+    # arguments: 
+    ## prefix: name of material, string
+    ## nat: number of inequivalent atoms in the material
+    ## erangexps: tuple of energy range for plotting, numeric
+    ## nptxps: number of points to plot, numeric
+    ## etotfch: total energy (Ry) with full core hole in given atom
+
+    control = " &CONTROL\n    donexafs='.FALSE.',\n    doxps='.TRUE.',\n    syslabel='" + prefix + "',\n    nat=" + f"{nat}" + ",\n" + " /\n"
     xps = " &XPS\n    erangexps=(" + f"{erangexps[0]}" + ":" + f"{erangexps[1]}" + "),\n    nptxps=" + f"{nptxps}" + ",\n    etotfch=" + f"{etotfch}" + ",\n /\n"
     nexafs = " &NEXAFS\n /\n"
     
@@ -257,6 +266,9 @@ def normalize_intensity(sigma):
 
     # description: normalize intensity to allow different spectras to be compared 
 
+    # arguments:
+    ## sigma: list of intensity, numeric
+    
     normalized_intensity = sigma / np.max(sigma)
     return(normalized_intensity)
 
