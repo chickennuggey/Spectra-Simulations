@@ -1,0 +1,21 @@
+ &input_xspectra
+    calculation='xanes_dipole',
+    edge='K',
+    prefix='aC2',
+    outdir='/u/home/n/nbriana/qe-7.3.1/XSpectra/test/results/tmp/',
+    x_save_file='aC2.xspectra.sav',
+    xiabs=2,
+ /
+ &plot
+    xnepoint=1000,
+    xemin=-10,
+    xemax=30,
+    xgamma=1,
+    cut_occ_states=.false.,
+ /
+ &pseudos
+    filecore='aC2.wfc',
+ /
+ &cut_occ
+ /
+1 1 1 0 0 0
