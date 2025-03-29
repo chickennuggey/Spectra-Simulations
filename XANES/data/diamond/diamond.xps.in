@@ -1,0 +1,13 @@
+ &CONTROL
+    donexafs='.FALSE.',
+    doxps='.TRUE.',
+    syslabel='diamond',
+    nat=1,
+ /
+ &XPS
+    erangexps=(-10:30),
+    nptxps=501,
+    etotfch=-100,
+ /
+ &NEXAFS
+ /
