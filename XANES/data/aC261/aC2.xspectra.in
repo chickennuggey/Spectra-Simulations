@@ -7,10 +7,10 @@
     xiabs=2,
  /
  &plot
-    xnepoint=1000,
+    xnepoint=100,
     xemin=-10,
     xemax=30,
-    xgamma=1,
+    xgamma=0.8,
     cut_occ_states=.false.,
  /
  &pseudos

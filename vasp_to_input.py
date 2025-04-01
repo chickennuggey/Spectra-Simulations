@@ -3,6 +3,7 @@ from striprtf.striprtf import rtf_to_text
 import re
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 
 ####################################################################################################
 ######################################### Helper Functions #########################################
@@ -58,9 +59,9 @@ def scf_input(vasp_file, prefix, pseudofile_list, absorbing_atom_type, absorbing
     
     # description: converts VASP file into input for SCF calculations using pw.x for XANES
     # Notes: 
-    ## VASP file must contain the following data: scaling factor, unscaled lattice vectors, 
-    ## species names, ions per species and ion positions
+    ## VASP file must contain the following data: scaling factor, unscaled lattice vectors, species names, ions per species and ion positions
     ## This function will work if also given more than one atom specie
+    ## Make sure that the pseudofile_list contains pseudofiles in same order as atoms in the VASP file and the last pseudofile is for the absorbing atom
 
     # arguments
     ## vasp_file: path to VASP file, string
@@ -207,19 +208,36 @@ def xspectra_input(cwf_file, prefix, out_directory = '$TMP_DIR/', absorbing_atom
 
 
 
-def xps_input(prefix, nat = 0, erangexps=(-5,5), nptxps=501, etotfch=0):
-    # NOT DONE. 
+def xps_input(prefix, atweight, etotfch, nat = 0, erangexps=(-5, 5), nptxps=501, delorentz=0.2, degauss=0.2, lorentzratio=0.5):
+
     # description: creates input file for xps calculation using molecularnexafs.x
 
     # arguments: 
     ## prefix: name of material, string
-    ## nat: number of inequivalent atoms in the material
-    ## erangexps: tuple of energy range for plotting, numeric
+    ## atweight: list of the multiplicities of the inequivalent atoms in the molecule, numeric
+    ## etotfch: list of total energy (Ry) with full core hole in that given atom, numeric
+    ## nat: number of inequivalent atoms in the material, numeric
+    ## erangexps: energy range for plotting, numeric
     ## nptxps: number of points to plot, numeric
-    ## etotfch: total energy (Ry) with full core hole in given atom
+    ## delorentz: half-width at half-maximum (HWHM) of the Lorentzian, numeric
+    ## degauss: standard deviation (STDDEV) of the Gaussian, numeric
+    ## lorentzratio: determines weight of Lorentzian component in peak shape, numeric
 
-    control = " &CONTROL\n    donexafs='.FALSE.',\n    doxps='.TRUE.',\n    syslabel='" + prefix + "',\n    nat=" + f"{nat}" + ",\n" + " /\n"
-    xps = " &XPS\n    erangexps=(" + f"{erangexps[0]}" + ":" + f"{erangexps[1]}" + "),\n    nptxps=" + f"{nptxps}" + ",\n    etotfch=" + f"{etotfch}" + ",\n /\n"
+    if len(atweight) != nat:
+        raise ValueError("Error: The length of atweight must be equal to nat.")
+    elif len(etotfch) != nat:
+        raise ValueError("Error: The length of etotfch must be equal to nat.")
+
+    atweight_list = ""
+    etotfch_list = ""
+
+    for i in range(nat):
+        atweight_list = atweight_list + f"{atweight[i]} "
+        etotfch_list = etotfch_list + f"    etotfch({i+1}) = {etotfch[i]}\n"
+
+    control = f" &CONTROL\n    donexafs = .false.\n    doxps = .true.\n    syslabel = '{prefix}'\n    nat = {nat}\n    atweight = {atweight_list}\n /\n"
+    xps = f" &XPS\n    erangexps = " + f"{erangexps[0]}. {erangexps[1]}.\n    nptxps = {nptxps}\n{etotfch_list}"
+    xps = xps + f"    delorentz = {delorentz}\n    degauss = {degauss}\n    lorentzratio = {lorentzratio}\n /\n"
     nexafs = " &NEXAFS\n /\n"
     
     xps_input = control + xps + nexafs
@@ -236,7 +254,7 @@ def xps_input(prefix, nat = 0, erangexps=(-5,5), nptxps=501, etotfch=0):
 
 
 
-def extract_spectra_data(dat_file):
+def extract_XANES_data(dat_file):
 
     # description: extracts energy and sigma data from a single dat_file
 
@@ -273,7 +291,7 @@ def normalize_intensity(sigma):
     return(normalized_intensity)
 
 
-def plot_spectra(dat_file, prefix, E_core=0):
+def plot_XANES(dat_file, prefix, E_core=0):
     
     # description: plots spectra data given a single dat_file
 
@@ -319,7 +337,7 @@ def plot_spectra(dat_file, prefix, E_core=0):
     plt.show()
 
 
-def average_spectra(dat_files):
+def average_XANES(dat_files):
     
     # description: averages energy and sigma data from list of dat_files
 
@@ -327,11 +345,37 @@ def average_spectra(dat_files):
     ## dat_files: list of spectra data files, string
     
     sigma_values = []
-    energy_values, _ = extract_spectra_data(dat_files[0])
+    energy_values, _ = extract_XANES_data(dat_files[0])
 
     for dat_file in dat_files:
-        _, sigma = extract_spectra_data(dat_file)
+        _, sigma = extract_XANES_data(dat_file)
         sigma_values.append(sigma)
 
     sigma_means = [(x + y) / 2 for x, y in zip(sigma_values[0], sigma_values[1])]
     return(energy_values, sigma_means)
+
+
+def extract_XPS_data(dat_file):
+    with open(dat_file, "r") as file:
+        content = file.read()
+        lines = content.splitlines()
+        lines = pd.Series(lines)
+
+        # count number of inequivalent atoms
+        nat = sum(lines.str.startswith('#cls'))
+
+        energy_values = []
+        intensity_values = [[] for _ in range(nat + 1)]
+
+        for line in lines[nat:]:
+            line = line.split()
+            energy_values.append(line[0])
+            for i in range(nat + 1):
+                intensity_values[i].append(line[i+1])
+            
+        energy_values = map(float, energy_values)
+        intensity_values = [list(map(float, intensity)) for intensity in intensity_values]
+
+    return(list(energy_values), intensity_values)
+
+

@@ -1,14 +1,16 @@
  &CONTROL
     donexafs = .false.
     doxps = .true.
-    syslabel = 'diamond'
-    nat = 1
-    atweight = 8 
+    syslabel = 'pyridine'
+    nat = 3
+    atweight = 1 2 2 
  /
  &XPS
     erangexps = -5. 5.
     nptxps = 201
-    etotfch(1) = -100.04861256
+    etotfch(1) = -89.728
+    etotfch(2) = -89.743
+    etotfch(3) = -89.705
     delorentz = 0.2
     degauss = 0.2
     lorentzratio = 0.5

@@ -7,13 +7,13 @@
  &system
     ibrav=0,
     nat=216.0,
+    tot_charge=1,
     ntyp=2,
     ecutwfc=20,
-    tot_charge=+1,    
  /
  &electrons
-   scf_must_converge=.false.,
- /
+    scf_must_converge=.false.,
+/
 ATOMIC_SPECIES
 C 12.011 C_PBE_TM_2pj.UPF
 C_h 12.011 Ch_PBE_TM_2pj.UPF

@@ -5,16 +5,15 @@
     prefix='aC1',
  /
  &system
-    ibrav=1,
-    A=14.2258815765,
-    nat=100,
+    ibrav=0,
+    nat=216.0,
+    tot_charge=1,
     ntyp=2,
     ecutwfc=20,
-    tot_charge=+1.0,
  /
  &electrons
     scf_must_converge=.false.,
- /
+/
 ATOMIC_SPECIES
 C 12.011 C_PBE_TM_2pj.UPF
 C_h 12.011 Ch_PBE_TM_2pj.UPF
@@ -236,3 +235,7 @@ C 0.648943007 0.989051998 0.995805025
 C 0.704855025 0.995242 0.843277991
 C 0.997160017 0.78450799 0.747902989
 K_POINTS gamma
+CELL_PARAMETERS angstrom
+14.2258815765 0.0 0.0
+0.0 14.2258815765 0.0
+0.0 0.0 14.2258815765

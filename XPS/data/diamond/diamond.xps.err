@@ -1,0 +1,72 @@
+# NEXAFS analysis running with the following input:
+ &CONTROL
+ SYSLABEL        = diamond                                                                         ,
+ DOXPS   = T,
+ DONEXAFS        = F,
+ NAT     =           1,
+ ATWEIGHT        =   8.00000000000000     , 19*1.00000000000000        
+ /
+ &XPS
+ ERANGEXPS       =  -5.00000000000000     ,   5.00000000000000     ,
+ NPTXPS  =         201,
+ DELORENTZ       =  0.200000000000000     ,
+ DEGAUSS =  0.200000000000000     ,
+ LORENTZRATIO    =  0.500000000000000     ,
+ ETOTFCH =  -100.048612560000     , 19*0.000000000000000E+000  
+ /
+ &NEXAFS
+ DOSINGLEATOMS   = T,
+ ERANGENEXAFS    =  -10.0000000000000     ,   20.0000000000000     ,
+ NPTNEXAFS       =        3001,
+ EFERMI  = 20*0.000000000000000E+000  ,
+ EVACUUM = 20*0.000000000000000E+000  ,
+ PREFIX  = xanes.dat.001                                                                   xanes.dat.002                             
+                                       xanes.dat.003                                                                   xanes.dat.004 
+                                                                   xanes.dat.005                                                     
+               xanes.dat.006                                                                   xanes.dat.007                         
+                                           xanes.dat.008                                                                   xanes.dat.
+ 009                                                                   xanes.dat.010                                                 
+                   xanes.dat.011                                                                   xanes.dat.012                     
+                                               xanes.dat.013                                                                   xanes.
+ dat.014                                                                   xanes.dat.015                                             
+                       xanes.dat.016                                                                   xanes.dat.017                 
+                                                   xanes.dat.018                                                                   xa
+ nes.dat.019                                                                   xanes.dat.020                                         
+                           ,
+ SUFFIX  = .xspectraX.dat                                                                  .xspectraY.dat                            
+                                       .xspectraZ.dat                                                                  ,
+ ATLABEL = SUM                                                                             001                                       
+                                       002                                                                             003           
+                                                                   004                                                               
+               005                                                                             006                                   
+                                           007                                                                             008       
+                                                                       009                                                           
+                   010                                                                             011                               
+                                               012                                                                             013   
+                                                                           014                                                       
+                       015                                                                             016                           
+                                                   017                                                                             01
+ 8                                                                             019                                                   
+                           020                                                                             ,
+ DOPDOSP = F,
+ PDOSPFILE       = pdosp.dat.001                                                                   pdosp.dat.002                     
+                                               pdosp.dat.003                                                                   pdosp.
+ dat.004                                                                   pdosp.dat.005                                             
+                       pdosp.dat.006                                                                   pdosp.dat.007                 
+                                                   pdosp.dat.008                                                                   pd
+ osp.dat.009                                                                   pdosp.dat.010                                         
+                           pdosp.dat.011                                                                   pdosp.dat.012             
+                                                       pdosp.dat.013                                                                 
+   pdosp.dat.014                                                                   pdosp.dat.015                                     
+                               pdosp.dat.016                                                                   pdosp.dat.017         
+                                                           pdosp.dat.018                                                             
+       pdosp.dat.019                                                                   pdosp.dat.020                                 
+                                   
+ /
+ 
+ N   N EEEEE X   X   A   FFFFF  SSSS     DDDD   OOO  N   N EEEEE 
+ NN  N E      X X   A A  F     S         D   D O   O NN  N E     
+ N N N EEE     X    A A  FFF    SSS      D   D O   O N N N EEE   
+ N  NN E      X X  AAAAA F         S     D   D O   O N  NN E     
+ N   N EEEEE X   X A   A F     SSSS      DDDD   OOO  N   N EEEEE 
+ 
